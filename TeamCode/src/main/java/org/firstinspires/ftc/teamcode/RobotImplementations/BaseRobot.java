@@ -1,18 +1,89 @@
 package org.firstinspires.ftc.teamcode.RobotImplementations;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import java.util.Arrays;
 import java.util.List;
-import org.firstinspires.ftc.teamcode.Robot.IRobot;
-import org.firstinspires.ftc.teamcode.Robot.Subsystems.ISubsystem;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Hardware.Mode;
+import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IRobotController;
+import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.ISensor;
+import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.ISubsystem;
 
 public abstract class BaseRobot implements IRobot {
-  private HardwareMap hwMap;
+  private Telemetry telemetry;
+  private List<ISensor> sensorList;
   private List<ISubsystem> subsystemList;
 
-  public BaseRobot(HardwareMap hwMap, ISubsystem ...subsystems) {
-    this.hwMap = hwMap;
-    this.subsystemList = Arrays.asList(subsystems);
+  public BaseRobot(HardwareMap hwMap, Telemetry telemetry, Mode mode) {
+    this.telemetry = telemetry;
+    this.sensorList = this.genSensors(hwMap, mode);
+    this.subsystemList = this.genSubsystems(hwMap, mode);
+    switch (mode) {
+      case AUTON:
+        this.autoInit(hwMap);
+        break;
+      case TELEOP:
+        this.teleopInit(hwMap);
+        break;
+    }
   }
 
+  abstract List<ISensor> genSensors(HardwareMap hwMap, Mode mode);
+  abstract List<ISubsystem> genSubsystems(HardwareMap hwMap, Mode mode);
+
+  @Override
+  public void autoInit(HardwareMap hwMap) {
+    for (ISubsystem sub : subsystemList) {
+      sub.autoInit(hwMap);
+    }
+
+  }
+
+  @Override
+  public void teleopInit(HardwareMap hwMap) {
+    for (ISubsystem sub : subsystemList) {
+      sub.teleopInit(hwMap);
+    }
+  }
+
+  @Override
+  public void autoInitLoop() {
+    for (ISubsystem sub : subsystemList) {
+      sub.autoInitLoop();
+    }
+  }
+
+  @Override
+  public void teleopInitLoop() {
+    for (ISubsystem sub : subsystemList) {
+      sub.teleopInitLoop();
+    }
+  }
+
+  @Override
+  public void autoStart() {
+    for (ISubsystem sub : subsystemList) {
+      sub.autoStart();
+    }
+  }
+
+  @Override
+  public void teleopStart() {
+    for (ISubsystem sub : subsystemList) {
+      sub.teleopStart();
+    }
+  }
+
+  @Override
+  public void stop() {
+    for (ISubsystem sub : subsystemList) {
+      sub.stop();
+    }
+  }
+
+  @Override
+  public void dispatchState(IRobotController robotState) {
+    for (ISubsystem subsystem : this.subsystemList) {
+      subsystem.dispatchState(robotState);
+    }
+  }
 }

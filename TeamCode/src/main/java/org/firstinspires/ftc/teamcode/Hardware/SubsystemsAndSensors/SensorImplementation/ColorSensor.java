@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.Robot.Sensors;
+package org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation;
 
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.Robot.Subsystems.ISubsystem;
+import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.IDriveTrain;
 
 public class ColorSensor implements ISensor {
 
@@ -13,12 +13,8 @@ public class ColorSensor implements ISensor {
   }
 
   @Override
-  public void dispatchSubsystem(ISubsystem subsystem) {
-
-  }
-
-  @Override
   public void init(HardwareMap hwMap) {
 
   }
+
 }

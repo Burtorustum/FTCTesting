@@ -2,21 +2,30 @@ package org.firstinspires.ftc.teamcode.Autons;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.Robot.IRobot;
-import org.firstinspires.ftc.teamcode.Robot.Start;
-import org.firstinspires.ftc.teamcode.Robot.StateMachine.AutonStateMachine;
-import org.firstinspires.ftc.teamcode.Robot.Team;
-import org.firstinspires.ftc.teamcode.RobotImplementations.FirstIterationRobot;
+import java.util.ArrayList;
+import java.util.List;
+import org.firstinspires.ftc.teamcode.Hardware.Mode;
+import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IAutonController;
+import org.firstinspires.ftc.teamcode.RobotImplementations.IRobot;
+import org.firstinspires.ftc.teamcode.Hardware.StateMachine.AutonStateMachine;
+import org.firstinspires.ftc.teamcode.RobotImplementations.MecanumDriveRobot;
 
 @TeleOp(name = "AutoRedCloseDuck", group = "Auton")
 //@Disabled
 public class AutoRedCloseDuck extends OpMode {
   private IRobot robot;
+  private List<IAutonController> stateList;
   private AutonStateMachine stateMachine;
 
   @Override
   public void init() {
-    this.robot = new FirstIterationRobot(hardwareMap);
+    this.robot = new MecanumDriveRobot(hardwareMap, telemetry, Mode.AUTON);
+    this.stateList = new ArrayList<IAutonController>();
+
+    //this.stateList.add(asdasd);
+    // ...
+
+    this.stateMachine = new AutonStateMachine(this.robot, this.stateList);
 
     robot.autoInit(hardwareMap);
     telemetry.addData("Status", "Initialized");
@@ -34,7 +43,7 @@ public class AutoRedCloseDuck extends OpMode {
 
   @Override
   public void loop() {
-    robot.runAuto(Team.RED, Start.CLOSEDUCK);
+
   }
 
   @Override
