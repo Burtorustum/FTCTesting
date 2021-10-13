@@ -9,14 +9,16 @@ import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplem
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.ISubsystem;
 
 public abstract class BaseRobot implements IRobot {
-  private Telemetry telemetry;
-  private List<ISensor> sensorList;
-  private List<ISubsystem> subsystemList;
+  private final Telemetry telemetry;
+  private final List<ISensor> sensorList;
+  private final List<ISubsystem> subsystemList;
+  private final Mode mode;
 
   public BaseRobot(HardwareMap hwMap, Telemetry telemetry, Mode mode) {
     this.telemetry = telemetry;
     this.sensorList = this.genSensors(hwMap, mode);
     this.subsystemList = this.genSubsystems(hwMap, mode);
+    this.mode = mode; //TODO: MODE SWITCH FOR EACH INIT/INITLOOP/START/ETC
     switch (mode) {
       case AUTON:
         this.autoInit(hwMap);
@@ -86,4 +88,20 @@ public abstract class BaseRobot implements IRobot {
       subsystem.dispatchState(robotState);
     }
   }
+
+  @Override
+  public void sendTelemetry(String msg, Object... data) {
+    String line = msg;
+    for (Object o : data) {
+      line += o.toString() + ", ";
+    }
+    this.telemetry.addLine(line);
+  }
+
+  @Override
+  public void updateTelemetry() {
+    this.telemetry.update();
+  }
+
+
 }

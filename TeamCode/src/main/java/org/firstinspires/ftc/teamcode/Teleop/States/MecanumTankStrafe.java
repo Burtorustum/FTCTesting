@@ -1,11 +1,10 @@
-package org.firstinspires.ftc.teamcode.Teleops.States;
+package org.firstinspires.ftc.teamcode.Teleop.States;
 
 import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IRobotController;
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.ISubsystem;
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.ColorSensor;
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
-public class FieldCentricDrive implements IRobotController {
+public class MecanumTankStrafe implements IRobotController {
 
   @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {

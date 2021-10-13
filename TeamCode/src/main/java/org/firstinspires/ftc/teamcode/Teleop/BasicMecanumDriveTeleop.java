@@ -1,13 +1,12 @@
-package org.firstinspires.ftc.teamcode.Teleops;
+package org.firstinspires.ftc.teamcode.Teleop;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Hardware.Mode;
 import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IRobotController;
 import org.firstinspires.ftc.teamcode.RobotImplementations.IRobot;
 import org.firstinspires.ftc.teamcode.RobotImplementations.MecanumDriveRobot;
-import org.firstinspires.ftc.teamcode.Teleops.States.MecanumTankStrafe;
+import org.firstinspires.ftc.teamcode.Teleop.States.MecanumTankStrafe;
 
 /**
  * <JavaDoc comment here for class>

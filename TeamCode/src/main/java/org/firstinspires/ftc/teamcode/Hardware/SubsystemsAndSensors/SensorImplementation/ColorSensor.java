@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImple
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.IDriveTrain;
 
-public class ColorSensor implements ISensor {
+public class ColorSensor implements ISensor, IOutputFunc<Double> {
 
   ColorSensor colorSensor;
 
@@ -17,4 +17,8 @@ public class ColorSensor implements ISensor {
 
   }
 
+  @Override
+  public Double getOutput() {
+    return 0.0;
+  }
 }

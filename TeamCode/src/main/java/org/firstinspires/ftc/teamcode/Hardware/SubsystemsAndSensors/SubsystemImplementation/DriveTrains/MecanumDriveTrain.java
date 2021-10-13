@@ -7,10 +7,17 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Hardware.Mode;
 import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IRobotController;
+import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.IOutputFunc;
+import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
 
 public class MecanumDriveTrain implements IDriveTrain {
 
   private DcMotor FL, BL, FR, BR;
+  //TODO: Add actual vals
+  private final int encoderTicksPerRotation = 1;
+  private final int gearRatio = 1;
+  // in inches
+  private final int wheelDiameter = 4;
 
   public MecanumDriveTrain(HardwareMap hwMap, Mode mode) {
     switch (mode) {
@@ -105,6 +112,13 @@ public class MecanumDriveTrain implements IDriveTrain {
     BL.setPower(power);
     FR.setPower(-power);
     BR.setPower(-power);
+  }
+
+  @Override
+  public void turnToHeading(double basePower, int targetHeading, int tolerance, MiniPID controller,
+      IOutputFunc<Float> curHeading) {
+    float heading = curHeading.getOutput();
+
   }
 
   public void tankDrive(double leftStick, double rightStick) {

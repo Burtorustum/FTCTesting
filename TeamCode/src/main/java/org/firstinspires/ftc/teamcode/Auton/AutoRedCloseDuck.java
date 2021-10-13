@@ -1,7 +1,9 @@
-package org.firstinspires.ftc.teamcode.Autons;
+package org.firstinspires.ftc.teamcode.Auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import java.util.ArrayList;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.Hardware.Mode;
@@ -43,6 +45,7 @@ public class AutoRedCloseDuck extends OpMode {
 
   @Override
   public void loop() {
+
 
   }
 
