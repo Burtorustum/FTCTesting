@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IRobotController;
 
-public class IMUSensor implements ISensor, IOutputFunc<Float>{
-
+public class IMUSensor extends AbstractSensor<Float>{
 
   private BNO055IMU gyro;
 
@@ -18,7 +18,7 @@ public class IMUSensor implements ISensor, IOutputFunc<Float>{
     this.init(hwMap);
   }
 
-  @Override
+  //TODO: split to other inits
   public void init(HardwareMap hwMap) {
     this.gyro = hwMap.get(BNO055IMU.class, "imu");
     Parameters parameters = new Parameters();
@@ -35,7 +35,6 @@ public class IMUSensor implements ISensor, IOutputFunc<Float>{
    */
   @Override
   public Float getOutput() {
-// TODO: MAKE GET OUPUT TAKE AN ENUM FOR TELEMETRY OR SENSOR DATA
     // Z is heading axis, rotation around vector through out the top/bottom of the rev hub
     float x = this.gyro.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.ZXY, AngleUnit.DEGREES).firstAngle;
     // Normalize values to within 0 - 359
@@ -45,5 +44,50 @@ public class IMUSensor implements ISensor, IOutputFunc<Float>{
     }
 
     return x;
+  }
+
+  @Override
+  public void autoInit(HardwareMap hwMap) {
+
+  }
+
+  @Override
+  public void teleopInit(HardwareMap hwMap) {
+
+  }
+
+  @Override
+  public void autoInitLoop() {
+
+  }
+
+  @Override
+  public void teleopInitLoop() {
+
+  }
+
+  @Override
+  public void autoStart() {
+
+  }
+
+  @Override
+  public void teleopStart() {
+
+  }
+
+  @Override
+  public void stop() {
+
+  }
+
+  @Override
+  public void dispatchState(IRobotController robotState) {
+    robotState.receiveGyro(this);
+  }
+
+  @Override
+  public String toString() {
+    return "Heading: " + this.getOutput();
   }
 }

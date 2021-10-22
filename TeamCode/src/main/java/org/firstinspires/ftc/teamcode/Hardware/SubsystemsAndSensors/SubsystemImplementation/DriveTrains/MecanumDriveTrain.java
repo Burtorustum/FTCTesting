@@ -4,10 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Hardware.Mode;
 import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IRobotController;
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.IOutputFunc;
 import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
 
 public class MecanumDriveTrain implements IDriveTrain {
@@ -114,18 +112,15 @@ public class MecanumDriveTrain implements IDriveTrain {
     BR.setPower(-power);
   }
 
-  @Override
-  public void turnToHeading(double basePower, int targetHeading, int tolerance, MiniPID controller,
-      IOutputFunc<Float> curHeading) {
-    float heading = curHeading.getOutput();
-
-  }
-
   public void tankDrive(double leftStick, double rightStick) {
     FL.setPower(-leftStick);
     BL.setPower(-leftStick);
     FR.setPower(-rightStick);
     BR.setPower(-rightStick);
+  }
+
+  public void robotCentric(double leftStick, double rightStick) {
+    //TODO: this
   }
 
   public void strafeLeft(double power) {
@@ -141,7 +136,6 @@ public class MecanumDriveTrain implements IDriveTrain {
     FR.setPower(power);
     BR.setPower(-power);
   }
-
 
   public void setFLPower(double power) {
     FL.setPower(power);

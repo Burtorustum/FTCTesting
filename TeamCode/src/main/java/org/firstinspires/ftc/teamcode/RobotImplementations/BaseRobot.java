@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.RobotImplementations;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -37,7 +38,7 @@ public abstract class BaseRobot implements IRobot {
     for (ISubsystem sub : subsystemList) {
       sub.autoInit(hwMap);
     }
-
+    // TODO: EITHER ADD LOOP FOR SENSORS OR MAKE SENSORS IMPLEMENT SUBSYSTEM
   }
 
   @Override
@@ -83,7 +84,14 @@ public abstract class BaseRobot implements IRobot {
   }
 
   @Override
-  public void dispatchState(IRobotController robotState) {
+  public void teleopDispatchState(IRobotController robotState, Gamepad gp1, Gamepad gp2) {
+    for (ISubsystem subsystem : this.subsystemList) {
+      subsystem.dispatchState(robotState);
+    }
+  }
+
+  @Override
+  public void autoDispatchState(IRobotController robotState) {
     for (ISubsystem subsystem : this.subsystemList) {
       subsystem.dispatchState(robotState);
     }
@@ -102,6 +110,4 @@ public abstract class BaseRobot implements IRobot {
   public void updateTelemetry() {
     this.telemetry.update();
   }
-
-
 }

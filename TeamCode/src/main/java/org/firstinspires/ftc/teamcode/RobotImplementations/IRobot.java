@@ -24,7 +24,10 @@ public interface IRobot {
 
     void stop();
 
-    void dispatchState(IRobotController robotState);
+    void autoDispatchState(IRobotController robotState);
+
+    void teleopDispatchState(IRobotController robotState, Gamepad gp1, Gamepad gp2);
+
 
     void sendTelemetry(String msg, Object... data);
 

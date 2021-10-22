@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.ISubsystem;
 
-public interface ISensor{
+public interface ISensor<T> extends ISubsystem {
 
-  void init(HardwareMap hwMap);
+  T getOutput();
+
+  @Override
+  String toString();
 }

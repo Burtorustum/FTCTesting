@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.Auton.GyroDrive;
 
 import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IAutonController;
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.ColorSensor;
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.IMUSensor;
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
