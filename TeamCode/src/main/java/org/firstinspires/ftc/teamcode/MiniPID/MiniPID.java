@@ -181,7 +181,7 @@ public class MiniPID{
 	/**
 	 * Set the maximum output value contributed by the I component of the system
 	 * This can be used to prevent large windup issues and make tuning simpler
-	 * @param maximum. Units are the same as the expected output value
+	 * @param maximum Units are the same as the expected output value
 	 */
 	public void setMaxIOutput(double maximum){
 		// Internally maxError and Izone are similar, but scaled for different purposes. 
@@ -432,7 +432,7 @@ public class MiniPID{
 		if(value > max){ return max;}
 		if(value < min){ return min;}
 		return value;
-	}  
+	}
 
 	/**
 	 * Test if the value is within the min and max, inclusive
