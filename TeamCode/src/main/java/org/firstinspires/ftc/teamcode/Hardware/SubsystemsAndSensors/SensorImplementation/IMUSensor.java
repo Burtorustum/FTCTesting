@@ -13,6 +13,11 @@ public class IMUSensor implements ISensor, IOutputFunc<Float>{
 
 
   private BNO055IMU gyro;
+
+  public IMUSensor(HardwareMap hwMap) {
+    this.init(hwMap);
+  }
+
   @Override
   public void init(HardwareMap hwMap) {
     this.gyro = hwMap.get(BNO055IMU.class, "imu");
@@ -24,12 +29,21 @@ public class IMUSensor implements ISensor, IOutputFunc<Float>{
     this.gyro.initialize(parameters);
   }
 
-
+  /**
+   *
+   * @return Heading between 0 and 359 degrees
+   */
   @Override
   public Float getOutput() {
-    //TODO: TEST EXTRINSIC VS INTRINSIC
-
+// TODO: MAKE GET OUPUT TAKE AN ENUM FOR TELEMETRY OR SENSOR DATA
     // Z is heading axis, rotation around vector through out the top/bottom of the rev hub
-    return this.gyro.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.ZXY, AngleUnit.DEGREES).firstAngle;
+    float x = this.gyro.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.ZXY, AngleUnit.DEGREES).firstAngle;
+    // Normalize values to within 0 - 359
+    // want 0 heading to be at reset, -179 to be 181, -1 to be 359
+    if (x < 0) {
+      x = 360 + x;
+    }
+
+    return x;
   }
 }

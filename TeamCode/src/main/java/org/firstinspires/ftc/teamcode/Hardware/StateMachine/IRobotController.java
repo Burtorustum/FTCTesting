@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Hardware.StateMachine;
 
+import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.IMUSensor;
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.ISubsystem;
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.ColorSensor;
 import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
@@ -13,5 +14,5 @@ public interface IRobotController {
 
   // NEED METHOD FOR EVERY SENSOR
 
-  void receiveColorSensor(ColorSensor colorSensor);
+  void receiveGyro(IMUSensor gyro);
 }

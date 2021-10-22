@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import java.util.ArrayList;
 import java.util.List;
+import org.firstinspires.ftc.teamcode.Auton.GyroDrive.GyroTurn;
 import org.firstinspires.ftc.teamcode.Hardware.Mode;
 import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IAutonController;
 import org.firstinspires.ftc.teamcode.RobotImplementations.IRobot;
@@ -23,35 +24,35 @@ public class AutoRedCloseDuck extends OpMode {
   public void init() {
     this.robot = new MecanumDriveRobot(hardwareMap, telemetry, Mode.AUTON);
     this.stateList = new ArrayList<IAutonController>();
-
+    this.stateList.add(new GyroTurn(0,0,0, 180));
     //this.stateList.add(asdasd);
     // ...
 
     this.stateMachine = new AutonStateMachine(this.robot, this.stateList);
 
-    robot.autoInit(hardwareMap);
-    telemetry.addData("Status", "Initialized");
+    this.robot.autoInit(hardwareMap);
+    this.telemetry.addData("Status", "Initialized");
   }
 
   @Override
   public void init_loop() {
-    robot.autoInitLoop();
+    this.robot.autoInitLoop();
   }
 
   @Override
   public void start() {
-    robot.autoStart();
+    this.robot.autoStart();
   }
 
   @Override
   public void loop() {
-
+    this.stateMachine.iterate();
 
   }
 
   @Override
   public void stop() {
-    robot.stop();
+    this.robot.stop();
   }
 
 }
