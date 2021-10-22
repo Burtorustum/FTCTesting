@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU.Parameters;
 import com.qualcomm.hardware.bosch.BNO055IMU.SensorMode;
 import com.qualcomm.hardware.bosch.BNO055IMUImpl;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -36,7 +37,7 @@ public class IMUSensor extends AbstractSensor<Float>{
   @Override
   public Float getOutput() {
     // Z is heading axis, rotation around vector through out the top/bottom of the rev hub
-    float x = this.gyro.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.ZXY, AngleUnit.DEGREES).firstAngle;
+    float x = this.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZXY, AngleUnit.DEGREES).firstAngle;
     // Normalize values to within 0 - 359
     // want 0 heading to be at reset, -179 to be 181, -1 to be 359
     if (x < 0) {
@@ -82,7 +83,12 @@ public class IMUSensor extends AbstractSensor<Float>{
   }
 
   @Override
-  public void dispatchState(IRobotController robotState) {
+  public void autoDispatchState(IRobotController robotState) {
+    robotState.receiveGyro(this);
+  }
+
+  @Override
+  public void teleopDispatchState(IRobotController robotState, Gamepad gp1, Gamepad gp2) {
     robotState.receiveGyro(this);
   }
 
