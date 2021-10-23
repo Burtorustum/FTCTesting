@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode.Auton.GyroDrive;
+package org.firstinspires.ftc.teamcode.Auton.AutonControllers;
 
-import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IAutonController;
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.IMUSensor;
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SensorImplementation.IMUSensor;
+import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
 
 public class GyroTurn implements IAutonController {
@@ -20,7 +19,8 @@ public class GyroTurn implements IAutonController {
     this.pid = new MiniPID(kp, ki, kd);
     this.pid.setSetpoint(this.target);
     this.pid.setSetpointRange(1);
-    this.pid.setDirection(false); // TODO: TEST
+    this.pid.setDirection(false); // can be changed based on how it turns
+    // TODO: May need to add parameter to constructor for above
     this.pid.setOutputLimits(-1, 1);
     this.pid.setOutputRampRate(.05);
   }

@@ -1,13 +1,10 @@
-package org.firstinspires.ftc.teamcode.Auton.GyroDrive;
+package org.firstinspires.ftc.teamcode.Auton.AutonControllers;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.Hardware.Mode;
-import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IAutonController;
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.IMUSensor;
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SensorImplementation.IMUSensor;
+import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
 /**
  * <JavaDoc comment here for class>

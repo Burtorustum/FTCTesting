@@ -1,6 +1,7 @@
-package org.firstinspires.ftc.teamcode.Hardware.StateMachine;
+package org.firstinspires.ftc.teamcode.StateMachine;
 
 import java.util.List;
+import org.firstinspires.ftc.teamcode.Auton.AutonControllers.IAutonController;
 import org.firstinspires.ftc.teamcode.RobotImplementations.IRobot;
 
 public class AutonStateMachine {
@@ -19,7 +20,7 @@ public class AutonStateMachine {
     } else if (this.stateList.get(0).finishedExecution()) {
       this.stateList.remove(0);
     } else {
-      this.robot.autoDispatchState(this.stateList.get(0));
+      this.robot.dispatchState(this.stateList.get(0));
     }
   }
 }

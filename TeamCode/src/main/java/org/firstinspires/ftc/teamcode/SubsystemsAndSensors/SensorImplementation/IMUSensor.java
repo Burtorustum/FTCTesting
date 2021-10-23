@@ -1,15 +1,14 @@
-package org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation;
+package org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SensorImplementation;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU.Parameters;
 import com.qualcomm.hardware.bosch.BNO055IMU.SensorMode;
-import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IRobotController;
+import org.firstinspires.ftc.teamcode.StateMachine.IRobotController;
 
 public class IMUSensor extends AbstractSensor<Float>{
 
@@ -83,12 +82,7 @@ public class IMUSensor extends AbstractSensor<Float>{
   }
 
   @Override
-  public void autoDispatchState(IRobotController robotState) {
-    robotState.receiveGyro(this);
-  }
-
-  @Override
-  public void teleopDispatchState(IRobotController robotState, Gamepad gp1, Gamepad gp2) {
+  public void dispatchState(IRobotController robotState) {
     robotState.receiveGyro(this);
   }
 

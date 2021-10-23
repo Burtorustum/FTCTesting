@@ -1,7 +1,7 @@
-package org.firstinspires.ftc.teamcode.Hardware.StateMachine;
+package org.firstinspires.ftc.teamcode.StateMachine;
 
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SensorImplementation.IMUSensor;
-import org.firstinspires.ftc.teamcode.Hardware.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SensorImplementation.IMUSensor;
+import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
 // COULD MAKE SEPARATE INTERFACE FOR EACH ROBOT ITERATION, REDUCING NUMBER OF METHODS NEEDING TO BE WRITTEN
 public interface IRobotController {

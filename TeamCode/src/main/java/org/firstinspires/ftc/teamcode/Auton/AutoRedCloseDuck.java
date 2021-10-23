@@ -2,46 +2,44 @@ package org.firstinspires.ftc.teamcode.Auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import java.util.ArrayList;
 import java.util.List;
-import org.firstinspires.ftc.teamcode.Auton.GyroDrive.GyroTurn;
-import org.firstinspires.ftc.teamcode.Hardware.Mode;
-import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IAutonController;
+import org.firstinspires.ftc.teamcode.Auton.AutonControllers.GyroTurn;
+import org.firstinspires.ftc.teamcode.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.RobotParameters.Start;
+import org.firstinspires.ftc.teamcode.RobotParameters.StartParameters;
+import org.firstinspires.ftc.teamcode.RobotParameters.Team;
+import org.firstinspires.ftc.teamcode.Auton.AutonControllers.IAutonController;
 import org.firstinspires.ftc.teamcode.RobotImplementations.IRobot;
-import org.firstinspires.ftc.teamcode.Hardware.StateMachine.AutonStateMachine;
+import org.firstinspires.ftc.teamcode.StateMachine.AutonStateMachine;
 import org.firstinspires.ftc.teamcode.RobotImplementations.MecanumDriveRobot;
 
 @TeleOp(name = "AutoRedCloseDuck", group = "Auton")
 //@Disabled
 public class AutoRedCloseDuck extends OpMode {
   private IRobot robot;
-  private List<IAutonController> stateList;
   private AutonStateMachine stateMachine;
 
   @Override
   public void init() {
-    this.robot = new MecanumDriveRobot(hardwareMap, telemetry, Mode.AUTON);
-    this.stateList = new ArrayList<IAutonController>();
-    this.stateList.add(new GyroTurn(0,0,0, 180));
+    this.robot = new MecanumDriveRobot(hardwareMap, telemetry,
+        new StartParameters(Mode.AUTON, Start.CLOSEDUCK, Team.RED));
+    List<IAutonController> stateList = new ArrayList<>();
+    stateList.add(new GyroTurn(0,0,0, 180));
     //this.stateList.add(asdasd);
     // ...
 
-    this.stateMachine = new AutonStateMachine(this.robot, this.stateList);
-
-    this.robot.autoInit(hardwareMap);
-    this.telemetry.addData("Status", "Initialized");
+    this.stateMachine = new AutonStateMachine(this.robot, stateList);
   }
 
   @Override
   public void init_loop() {
-    this.robot.autoInitLoop();
+    this.robot.initLoop();
   }
 
   @Override
   public void start() {
-    this.robot.autoStart();
+    this.robot.start();
   }
 
   @Override

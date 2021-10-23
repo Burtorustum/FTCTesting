@@ -2,63 +2,53 @@ package org.firstinspires.ftc.teamcode.Teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.Hardware.Mode;
-import org.firstinspires.ftc.teamcode.Hardware.StateMachine.IRobotController;
+import java.util.ArrayList;
+import java.util.List;
+import org.firstinspires.ftc.teamcode.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.RobotParameters.Start;
+import org.firstinspires.ftc.teamcode.RobotParameters.StartParameters;
+import org.firstinspires.ftc.teamcode.RobotParameters.Team;
+import org.firstinspires.ftc.teamcode.StateMachine.IRobotController;
 import org.firstinspires.ftc.teamcode.RobotImplementations.IRobot;
 import org.firstinspires.ftc.teamcode.RobotImplementations.MecanumDriveRobot;
-import org.firstinspires.ftc.teamcode.Teleop.States.MecanumTankStrafe;
+import org.firstinspires.ftc.teamcode.StateMachine.TeleopStateMachine;
+import org.firstinspires.ftc.teamcode.Teleop.TeleopControllers.MecanumTankStrafe;
 
-/**
- * <JavaDoc comment here for class>
- */
-@TeleOp(name = "BasicMecanumDriveTeleop", group = "Teleop")
-//@Disabled
+@TeleOp(name = "BasicMecanumTankTeleop", group = "Teleop")
 public class BasicMecanumDriveTeleop extends OpMode {
-  // Declare OpMode fields
-  IRobot robot;
-  IRobotController controller;
+  private IRobot robot;
+  private TeleopStateMachine stateMachine;
 
-  /**
-   * Code to run ONCE when the driver hits INIT
-   */
   @Override
   public void init() {
-    // Initialize all fields
-    robot = new MecanumDriveRobot(hardwareMap, telemetry, Mode.TELEOP);
-    controller = new MecanumTankStrafe();
-    // Tell the driver that initialization is complete.
-    telemetry.addData("Status", "Initialized");
+    this.robot = new MecanumDriveRobot(hardwareMap, telemetry,
+        new StartParameters(Mode.TELEOP, Start.IRRELEVANT, Team.IRRELEVANT));
+    List<IRobotController> stateList = new ArrayList<>();
+    stateList.add(new MecanumTankStrafe(gamepad1, gamepad2));
+    //this.stateList.add(asdasd);
+    // ...
+
+    this.stateMachine = new TeleopStateMachine(this.robot, stateList);
   }
 
-  /**
-   * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
-   */
   @Override
   public void init_loop() {
+    this.robot.initLoop();
   }
 
-  /**
-   * Code to run ONCE when the driver hits PLAY
-   */
   @Override
   public void start() {
-
+    this.robot.start();
   }
 
-  /**
-   * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
-   */
   @Override
   public void loop() {
-
+    this.stateMachine.iterate();
   }
 
-  /**
-   * Code to run ONCE after the driver hits STOP
-   */
   @Override
   public void stop() {
-
+    this.robot.stop();
   }
 
 }
