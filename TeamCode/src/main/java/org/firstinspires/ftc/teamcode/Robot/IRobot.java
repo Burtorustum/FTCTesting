@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.StartParameters;
 import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.StartParameters;
 
 public interface IRobot {
 

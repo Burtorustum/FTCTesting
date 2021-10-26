@@ -1,15 +1,17 @@
 package org.firstinspires.ftc.teamcode.OpMode.Auton.AutonControllers;
 
+import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
 import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUSensor;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
-import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
 
 public class GyroTurn implements IRobotController {
 
-  private double kp, ki, kd;
-  private int target;
-  private MiniPID pid;
+  private final double kp;
+  private final double ki;
+  private final double kd;
+  private final int target;
+  private final MiniPID pid;
 
   public GyroTurn(double kp, double ki, double kd, int target) {
     this.kp = kp;

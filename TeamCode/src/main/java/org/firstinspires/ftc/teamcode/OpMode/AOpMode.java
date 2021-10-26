@@ -2,10 +2,10 @@ package org.firstinspires.ftc.teamcode.OpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import java.util.List;
-import org.firstinspires.ftc.teamcode.Robot.IRobot;
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.AutonStateMachine;
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.IStateMachine;
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.TeleopStateMachine;
+import org.firstinspires.ftc.teamcode.Robot.IRobot;
 
 public abstract class AOpMode extends OpMode {
   private IRobot robot;

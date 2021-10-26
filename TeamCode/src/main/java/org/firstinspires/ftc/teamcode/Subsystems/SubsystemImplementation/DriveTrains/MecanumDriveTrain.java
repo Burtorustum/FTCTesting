@@ -5,16 +5,16 @@ import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
 import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
 
 public class MecanumDriveTrain implements IDriveTrain {
 
-  private DcMotor FL, BL, FR, BR;
   private final double encoderTicksPerRotation = 537.6;
   private final int gearRatio = 1;
   // in inches
   private final double wheelDiameter = 4;
+  private DcMotor FL, BL, FR, BR;
 
   public MecanumDriveTrain(HardwareMap hwMap, Mode mode) {
     switch (mode) {
@@ -37,7 +37,7 @@ public class MecanumDriveTrain implements IDriveTrain {
     this.generalInit(hwMap);
   }
 
-  private void generalInit(HardwareMap hwMap){
+  private void generalInit(HardwareMap hwMap) {
     this.FL = hwMap.get(DcMotor.class, "FL");
     this.BL = hwMap.get(DcMotor.class, "BL");
     this.FR = hwMap.get(DcMotor.class, "FR");
@@ -111,10 +111,11 @@ public class MecanumDriveTrain implements IDriveTrain {
   @Override
   public void setMotorPower(DTMotorPos[] positions, double[] powers) {
     if (powers.length != 4 || positions.length != 4) {
-      throw new IllegalArgumentException("must give 4 power values and 4 proper motor positions for a mecanum drivetrain.");
+      throw new IllegalArgumentException(
+          "must give 4 power values and 4 proper motor positions for a mecanum drivetrain.");
     }
     for (int i = 0; i < 4; i++) {
-      switch(positions[i]) {
+      switch (positions[i]) {
         case BACK_LEFT:
           this.BL.setPower(powers[i]);
           break;
@@ -128,7 +129,8 @@ public class MecanumDriveTrain implements IDriveTrain {
           this.FR.setPower(powers[i]);
           break;
         default:
-          throw new IllegalArgumentException("Given position is not valid for mecanum DT: " + positions[i].name());
+          throw new IllegalArgumentException(
+              "Given position is not valid for mecanum DT: " + positions[i].name());
       }
     }
 
