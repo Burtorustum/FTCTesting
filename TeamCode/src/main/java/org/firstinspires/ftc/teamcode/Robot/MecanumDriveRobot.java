@@ -1,13 +1,13 @@
-package org.firstinspires.ftc.teamcode.RobotImplementations;
+package org.firstinspires.ftc.teamcode.Robot;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.ArrayList;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.RobotParameters.Mode;
-import org.firstinspires.ftc.teamcode.RobotParameters.StartParameters;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SensorImplementation.IMUSensor;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.ISubsystem;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.StartParameters;
+import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUSensor;
+import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
 public class MecanumDriveRobot extends BaseRobot {
 

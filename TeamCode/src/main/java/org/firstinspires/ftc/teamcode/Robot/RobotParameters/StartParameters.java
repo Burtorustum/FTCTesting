@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.RobotParameters;
+package org.firstinspires.ftc.teamcode.Robot.RobotParameters;
 
 public class StartParameters {
-    private Mode mode;
-    private Start start;
-    private Team team;
+    private final Mode mode;
+    private final Start start;
+    private final Team team;
 
     public StartParameters(Mode mode, Start start, Team team) {
         this.mode = mode;

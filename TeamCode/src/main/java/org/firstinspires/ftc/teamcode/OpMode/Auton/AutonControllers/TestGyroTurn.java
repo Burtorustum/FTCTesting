@@ -1,10 +1,11 @@
-package org.firstinspires.ftc.teamcode.Auton.AutonControllers;
+package org.firstinspires.ftc.teamcode.OpMode.Auton.AutonControllers;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import org.firstinspires.ftc.teamcode.RobotParameters.Mode;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SensorImplementation.IMUSensor;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUSensor;
+import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
 /**
  * <JavaDoc comment here for class>
@@ -15,7 +16,7 @@ public class TestGyroTurn extends OpMode {
   // Declare OpMode fields
   MecanumDriveTrain dt;
   IMUSensor imu;
-  IAutonController gyroTurn;
+  IRobotController gyroTurn;
 
   /**
    * Code to run ONCE when the driver hits INIT

@@ -1,10 +1,11 @@
-package org.firstinspires.ftc.teamcode.Auton.AutonControllers;
+package org.firstinspires.ftc.teamcode.OpMode.Auton.AutonControllers;
 
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SensorImplementation.IMUSensor;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUSensor;
+import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
 
-public class GyroTurn implements IAutonController {
+public class GyroTurn implements IRobotController {
 
   private double kp, ki, kd;
   private int target;

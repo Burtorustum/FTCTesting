@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains;
+package org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains;
 
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.ISubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 
 public interface IDriveTrain extends ISubsystem {
 

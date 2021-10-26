@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Teleop.TeleopControllers;
+package org.firstinspires.ftc.teamcode.OpMode.Teleop.TeleopControllers;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SensorImplementation.IMUSensor;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUSensor;
+import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
-public class FieldCentricDrive extends AbstractTeleopController {
+public class FieldCentricDrive extends ATeleopController {
   private double curHeading;
 
   public FieldCentricDrive(Gamepad gp1, Gamepad gp2) {

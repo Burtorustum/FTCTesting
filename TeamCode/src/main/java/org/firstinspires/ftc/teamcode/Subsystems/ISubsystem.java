@@ -1,7 +1,7 @@
-package org.firstinspires.ftc.teamcode.SubsystemsAndSensors;
+package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.StateMachine.IRobotController;
+import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
 
 public interface ISubsystem {
 

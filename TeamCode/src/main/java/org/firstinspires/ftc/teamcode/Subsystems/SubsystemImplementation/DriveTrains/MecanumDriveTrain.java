@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.SubsystemsAndSensors.SubsystemImplementation.DriveTrains;
+package org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.RobotParameters.Mode;
-import org.firstinspires.ftc.teamcode.StateMachine.IRobotController;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
 
 public class MecanumDriveTrain implements IDriveTrain {
 
@@ -164,7 +164,7 @@ public class MecanumDriveTrain implements IDriveTrain {
     double strafe = lStickX;
     double clockwise = rStickX;
 
-    // Apply the turn modifier k
+    // Apply the turn modifier
     clockwise *= 1; //TODO: Test and see if should be lowered
 
     // Convert to Radians for Math.sin/cos

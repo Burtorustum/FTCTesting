@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.RobotImplementations;
+package org.firstinspires.ftc.teamcode.Robot;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.RobotParameters.Mode;
-import org.firstinspires.ftc.teamcode.RobotParameters.StartParameters;
-import org.firstinspires.ftc.teamcode.StateMachine.IRobotController;
-import org.firstinspires.ftc.teamcode.SubsystemsAndSensors.ISubsystem;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.StartParameters;
+import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 
 public abstract class BaseRobot implements IRobot {
 
@@ -124,5 +124,10 @@ public abstract class BaseRobot implements IRobot {
   @Override
   public void updateTelemetry() {
     this.telemetry.update();
+  }
+
+  @Override
+  public StartParameters getParams() {
+    return this.params;
   }
 }
