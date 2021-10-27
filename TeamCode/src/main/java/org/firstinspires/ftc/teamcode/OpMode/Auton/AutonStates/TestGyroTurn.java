@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.OpMode.Auton.AutonControllers;
+package org.firstinspires.ftc.teamcode.OpMode.Auton.AutonStates;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
-import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUSensor;
+import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
 /**
@@ -14,9 +14,11 @@ import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTr
 //@Disabled
 public class TestGyroTurn extends OpMode {
   // Declare OpMode fields
-  MecanumDriveTrain dt;
-  IMUSensor imu;
-  IRobotController gyroTurn;
+  private MecanumDriveTrain dt;
+  private IMUGyro imu;
+  private ARobotState gyroTurn;
+  private final Mode mode = Mode.AUTON;
+
 
   /**
    * Code to run ONCE when the driver hits INIT
@@ -24,9 +26,9 @@ public class TestGyroTurn extends OpMode {
   @Override
   public void init() {
     // Initialize all fields
-     this.dt = new MecanumDriveTrain(hardwareMap, Mode.AUTON);
-     this.imu = new IMUSensor(hardwareMap);
-     this.gyroTurn = new GyroTurn(0,0,0,180);
+     this.dt = new MecanumDriveTrain(hardwareMap, this.mode);
+     this.imu = new IMUGyro(hardwareMap, this.mode);
+     this.gyroTurn = new GyroTurn(0,0,0,180, true);
 
   }
 

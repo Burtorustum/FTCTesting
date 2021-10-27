@@ -5,26 +5,21 @@ import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsystem;
 
-public class MecanumDriveTrain implements IDriveTrain {
+public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
 
   private final double encoderTicksPerRotation = 537.6;
   private final int gearRatio = 1;
-  // in inches
-  private final double wheelDiameter = 4;
+  private final double wheelDiameter = 4; // in inches
   private DcMotor FL, BL, FR, BR;
 
+  private boolean isInit = false;
+
   public MecanumDriveTrain(HardwareMap hwMap, Mode mode) {
-    switch (mode) {
-      case AUTON:
-        this.autoInit(hwMap);
-        break;
-      case TELEOP:
-        this.teleopInit(hwMap);
-        break;
-    }
+    super(hwMap, mode);
   }
 
   @Override
@@ -49,6 +44,8 @@ public class MecanumDriveTrain implements IDriveTrain {
     this.BR.setDirection(Direction.REVERSE);
 
     this.setMotorRunMode(RunMode.RUN_USING_ENCODER);
+
+    this.isInit = true;
   }
 
   @Override
@@ -80,8 +77,13 @@ public class MecanumDriveTrain implements IDriveTrain {
   }
 
   @Override
-  public void dispatchState(IRobotController robotState) {
+  public void dispatchState(ARobotState robotState) {
     robotState.receiveMecanumDriveTrain(this);
+  }
+
+  @Override
+  public boolean isInitialized() {
+    return this.isInit;
   }
 
   @Override

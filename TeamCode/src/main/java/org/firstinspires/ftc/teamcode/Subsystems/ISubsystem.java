@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 
 public interface ISubsystem {
 
@@ -19,6 +19,8 @@ public interface ISubsystem {
 
   void stop();
 
-  void dispatchState(IRobotController robotState);
+  void dispatchState(ARobotState robotState);
+
+  boolean isInitialized();
 
 }

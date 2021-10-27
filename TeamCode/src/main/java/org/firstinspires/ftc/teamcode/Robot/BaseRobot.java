@@ -2,20 +2,17 @@ package org.firstinspires.ftc.teamcode.Robot;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.List;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
 import org.firstinspires.ftc.teamcode.Robot.RobotParameters.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 
 public abstract class BaseRobot implements IRobot {
 
-  private final Telemetry telemetry;
   private final List<ISubsystem> subsystemList;
   private final StartParameters params;
 
-  public BaseRobot(HardwareMap hwMap, Telemetry telemetry, StartParameters params) {
-    this.telemetry = telemetry;
+  public BaseRobot(HardwareMap hwMap, StartParameters params) {
     this.params = params;
     this.subsystemList = this.genSubsystems(hwMap, this.params.getMode());
 
@@ -62,15 +59,24 @@ public abstract class BaseRobot implements IRobot {
   }
 
   private void autoInitLoop() {
-    for (ISubsystem sub : subsystemList) {
+    for (ISubsystem sub : this.subsystemList) {
       sub.autoInitLoop();
     }
   }
 
   private void teleopInitLoop() {
-    for (ISubsystem sub : subsystemList) {
+    for (ISubsystem sub : this.subsystemList) {
       sub.teleopInitLoop();
     }
+  }
+
+  public boolean isInitialized() {
+    for (ISubsystem sub : this.subsystemList) {
+      if (!sub.isInitialized()) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @Override
@@ -105,25 +111,10 @@ public abstract class BaseRobot implements IRobot {
   }
 
   @Override
-  public void dispatchState(IRobotController robotState) {
+  public void dispatchState(ARobotState robotState) {
     for (ISubsystem subsystem : this.subsystemList) {
       subsystem.dispatchState(robotState);
     }
-  }
-
-
-  @Override
-  public void sendTelemetry(String msg, Object... data) {
-    String line = msg;
-    for (Object o : data) {
-      line += o.toString() + ", ";
-    }
-    this.telemetry.addLine(line);
-  }
-
-  @Override
-  public void updateTelemetry() {
-    this.telemetry.update();
   }
 
   @Override

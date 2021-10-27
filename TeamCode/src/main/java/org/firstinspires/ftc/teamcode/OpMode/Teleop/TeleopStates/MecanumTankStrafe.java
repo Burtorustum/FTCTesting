@@ -1,13 +1,20 @@
-package org.firstinspires.ftc.teamcode.OpMode.Teleop.TeleopControllers;
+package org.firstinspires.ftc.teamcode.OpMode.Teleop.TeleopStates;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUSensor;
+import java.util.ArrayList;
+import java.util.List;
+import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
-public class MecanumTankStrafe extends ATeleopController {
+public class MecanumTankStrafe extends ATeleopState {
 
   public MecanumTankStrafe(Gamepad gp1, Gamepad gp2) {
     super(gp1, gp2);
+  }
+
+  @Override
+  public List<String> getTelemetry() {
+    return new ArrayList<>();
   }
 
   @Override
@@ -16,7 +23,7 @@ public class MecanumTankStrafe extends ATeleopController {
   }
 
   @Override
-  public void receiveGyro(IMUSensor gyro) {
+  public void receiveGyro(IMUGyro gyro) {
 
   }
 

@@ -11,9 +11,11 @@ public abstract class AOpMode extends OpMode {
   private IRobot robot;
   private IStateMachine stateMachine;
 
+  private boolean isInitialized = false;
+
   /**
    *
-   * @return an instance of the robot object desired for this OpMode
+   * @return a complete instance of the robot object desired for this OpMode
    */
   protected abstract IRobot setupRobot();
 
@@ -21,7 +23,7 @@ public abstract class AOpMode extends OpMode {
    *
    * @return A list of states for this robot to iterate through in this OpMode. If an autonomous mode the states must be given in the order to be executed. If teleop order within the list does not matter.
    */
-  protected abstract List<IRobotController> setupStates();
+  protected abstract List<ARobotState> setupStates();
 
   private void setupStateMachine() {
     switch(this.robot.getParams().getMode()) {
@@ -42,7 +44,13 @@ public abstract class AOpMode extends OpMode {
 
   @Override
   public void init_loop() {
-    this.robot.initLoop();
+    if (this.isInitialized) {
+      this.robot.initLoop();
+    } else {
+    this.isInitialized = this.robot.isInitialized();
+    }
+    this.telemetry.addLine("initialized? " + this.isInitialized);
+    this.telemetry.update();
   }
 
   @Override
@@ -52,7 +60,11 @@ public abstract class AOpMode extends OpMode {
 
   @Override
   public void loop() {
-    this.stateMachine.iterate();
+    List<String> telem = this.stateMachine.iterate();
+    for (String s : telem) {
+      this.telemetry.addLine(s);
+    }
+    this.telemetry.update();
   }
 
   @Override

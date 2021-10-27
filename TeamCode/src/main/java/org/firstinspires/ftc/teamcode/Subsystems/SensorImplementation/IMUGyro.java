@@ -7,25 +7,16 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.teamcode.OpMode.IRobotController;
+import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
+import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsystem;
 
-public class IMUSensor extends ASensor<Float> {
+public class IMUGyro extends ASubsystem implements ISensor<Float> {
 
   private BNO055IMU gyro;
 
-  public IMUSensor(HardwareMap hwMap) {
-    this.init(hwMap);
-  }
-
-  //TODO: split to other inits
-  public void init(HardwareMap hwMap) {
-    this.gyro = hwMap.get(BNO055IMU.class, "imu");
-    Parameters parameters = new Parameters();
-    parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-    parameters.mode = SensorMode.GYRONLY;
-    //parameters.
-
-    this.gyro.initialize(parameters);
+  public IMUGyro(HardwareMap hwMap, Mode mode) {
+    super(hwMap, mode);
   }
 
   /**
@@ -47,12 +38,27 @@ public class IMUSensor extends ASensor<Float> {
 
   @Override
   public void autoInit(HardwareMap hwMap) {
+    this.gyro = hwMap.get(BNO055IMU.class, "imu");
 
+    Parameters parameters = new Parameters();
+    parameters.calibrationDataFile = "BNO055IMUCalibration.json";
+    parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+    parameters.mode = SensorMode.GYRONLY;
+
+    this.gyro.initialize(parameters);
   }
 
   @Override
   public void teleopInit(HardwareMap hwMap) {
+    this.gyro = hwMap.get(BNO055IMU.class, "imu");
 
+    Parameters parameters = new Parameters();
+    parameters.calibrationDataFile = "BNO055IMUCalibration.json";
+    parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+    parameters.mode = SensorMode.GYRONLY;
+
+    // Ideally don't need to re-calibrate bc should be calibrated from auton
+    //this.gyro.initialize(parameters);
   }
 
   @Override
@@ -81,12 +87,13 @@ public class IMUSensor extends ASensor<Float> {
   }
 
   @Override
-  public void dispatchState(IRobotController robotState) {
+  public void dispatchState(ARobotState robotState) {
     robotState.receiveGyro(this);
   }
 
   @Override
-  public String toString() {
-    return "Heading: " + this.getOutput();
+  public boolean isInitialized() {
+    return this.gyro.isGyroCalibrated();
   }
+
 }
