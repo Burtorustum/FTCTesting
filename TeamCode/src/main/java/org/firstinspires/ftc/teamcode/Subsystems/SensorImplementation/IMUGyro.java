@@ -4,9 +4,12 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU.Parameters;
 import com.qualcomm.hardware.bosch.BNO055IMU.SensorMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ReadWriteFile;
+import java.io.File;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsystem;
@@ -14,6 +17,8 @@ import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsys
 public class IMUGyro extends ASubsystem implements ISensor<Float> {
 
   private BNO055IMU gyro;
+
+  private boolean calibComplete = false;
 
   public IMUGyro(HardwareMap hwMap, Mode mode) {
     super(hwMap, mode);
@@ -44,6 +49,8 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
     parameters.calibrationDataFile = "BNO055IMUCalibration.json";
     parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
     parameters.mode = SensorMode.GYRONLY;
+    parameters.loggingEnabled = true;
+    parameters.loggingTag = "IMU";
 
     this.gyro.initialize(parameters);
   }
@@ -58,12 +65,19 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
     parameters.mode = SensorMode.GYRONLY;
 
     // Ideally don't need to re-calibrate bc should be calibrated from auton
-    //this.gyro.initialize(parameters);
+    this.gyro.initialize(parameters);
+    this.calibComplete = true;
   }
 
   @Override
   public void autoInitLoop() {
-
+    if (!this.calibComplete && this.gyro.isGyroCalibrated()) {
+      BNO055IMU.CalibrationData calibrationData = this.gyro.readCalibrationData();
+      String filename = "BNO055IMUCalibration.json";
+      File file = AppUtil.getInstance().getSettingsFile(filename);
+      ReadWriteFile.writeFile(file, calibrationData.serialize());
+      this.calibComplete = true;
+    }
   }
 
   @Override
@@ -93,7 +107,7 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
 
   @Override
   public boolean isInitialized() {
-    return this.gyro.isGyroCalibrated();
+    return this.calibComplete;
   }
 
 }
