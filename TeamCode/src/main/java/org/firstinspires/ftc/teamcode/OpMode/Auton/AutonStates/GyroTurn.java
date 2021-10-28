@@ -10,27 +10,19 @@ import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTr
 
 public class GyroTurn extends ARobotState {
 
-  private final double kp;
-  private final double ki;
-  private final double kd;
-  private final int target;
   private final MiniPID pid;
 
   private double lastHeading;
 
-  public GyroTurn(double kp, double ki, double kd, int target, boolean turnRight) {
-    this.kp = kp;
-    this.ki = ki;
-    this.kd = kd;
-    this.target = target;
+  public GyroTurn(double kp, double ki, double kd, double target, boolean turnRight) {
 
     this.pid = new MiniPID(kp, ki, kd);
-    this.pid.setSetpoint(this.target);
-    this.pid.setSetpointRange(1);
+    this.pid.setSetpoint(target);
+    this.pid.setSetpointRange(0.5);
     this.pid.setDirection(!turnRight); // can be changed based on how it turns
     // TODO: May need to check above line
     this.pid.setOutputLimits(-1, 1);
-    this.pid.setOutputRampRate(.05);
+    //this.pid.setOutputRampRate(.05);
 
     // Deafult heading is 0
     this.lastHeading = 0;
@@ -58,6 +50,14 @@ public class GyroTurn extends ARobotState {
   @Override
   public void receiveGyro(IMUGyro gyro) {
     this.lastHeading = gyro.getOutput();
+  }
+
+  public void setKVals(double kp, double ki, double kd) {
+    this.pid.setPID(kp, ki, kd);
+  }
+
+  public void setTarget(double target) {
+    this.pid.setSetpoint(target);
   }
 
 }
