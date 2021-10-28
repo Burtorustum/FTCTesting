@@ -73,7 +73,7 @@ public class FieldCentricDrive extends ATeleopState {
         double rlPow = forward + clockwise - strafe;
         double rrPow = forward - clockwise + strafe;
 
-        double max = Math.max(1, Math.max(flPow, Math.max(frPow, Math.max(rlPow, rrPow))));
+        double max = Math.max(1, forward + strafe + clockwise);
 
         // Clip power values to within acceptable ranges for the motors
         flPow /= max;

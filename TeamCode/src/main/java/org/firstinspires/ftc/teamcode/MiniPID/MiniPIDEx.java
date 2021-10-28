@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.MiniPID;
 
-import org.checkerframework.checker.units.qual.Angle;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class MiniPIDEx extends MiniPID {
@@ -9,8 +8,11 @@ public class MiniPIDEx extends MiniPID {
         super(p, i, d);
     }
 
-
-    // Give gyro value and target between 0 and 359 degrees
+    /**
+     *
+     * @param actual A gyro value in degrees between 0 and 359 inclusive
+     * @return PID output based on given sensor data and pre-given target and coefficients
+     */
     public double getOutputGyro(double actual) {
         double output;
         double Poutput;
