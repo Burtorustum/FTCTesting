@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsystem;
 
 public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
@@ -18,7 +18,7 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
 
   private boolean isInit = false;
 
-  public MecanumDriveTrain(HardwareMap hwMap, Mode mode) {
+  public MecanumDriveTrain(HardwareMap hwMap, StartParameters.Mode mode) {
     super(hwMap, mode);
   }
 
@@ -152,68 +152,6 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
     this.BR.setZeroPowerBehavior(behavior);
     this.FL.setZeroPowerBehavior(behavior);
     this.FR.setZeroPowerBehavior(behavior);
-  }
-
-  public void tankDrive(double leftStickY, double rightStickY) {
-    FL.setPower(-leftStickY);
-    BL.setPower(-leftStickY);
-    FR.setPower(-rightStickY);
-    BR.setPower(-rightStickY);
-  }
-
-  // TODO: Test
-  public void fieldCentricDrive(double lStickY, double lStickX, double rStickX, double curHeading) {
-    // Get the controller values
-    double forward = (-1) * lStickY;
-    double strafe = lStickX;
-    double clockwise = rStickX;
-
-    // Apply the turn modifier
-    clockwise *= 1; //TODO: Test and see if should be lowered
-
-    // Convert to Radians for Math.sin/cos
-    double orient = Math.toRadians(curHeading);
-    double sin = Math.sin(orient);
-    double cos = Math.cos(orient);
-
-    // Apply the rotation matrix
-    double temp = forward * cos - strafe * sin;
-    strafe = forward * sin + strafe * cos;
-    forward = temp;
-
-    // Set power values
-    double flPow = forward + clockwise + strafe;
-    double frPow = forward - clockwise - strafe;
-    double rlPow = forward + clockwise - strafe;
-    double rrPow = forward - clockwise + strafe;
-
-    double max = Math.max(1, Math.max(flPow, Math.max(frPow, Math.max(rlPow, rrPow))));
-
-    // Clip power values to within acceptable ranges for the motors
-    flPow /= max;
-    frPow /= max;
-    rlPow /= max;
-    rrPow /= max;
-
-    // Send power values to motors
-    FL.setPower(flPow);
-    BL.setPower(rlPow);
-    FR.setPower(frPow);
-    BR.setPower(rrPow);
-  }
-
-  public void strafeLeft(double power) {
-    FL.setPower(power);
-    BL.setPower(-power);
-    FR.setPower(-power);
-    BR.setPower(power);
-  }
-
-  public void strafeRight(double power) {
-    FL.setPower(-power);
-    BL.setPower(power);
-    FR.setPower(power);
-    BR.setPower(-power);
   }
 
   public void setFLPower(double power) {

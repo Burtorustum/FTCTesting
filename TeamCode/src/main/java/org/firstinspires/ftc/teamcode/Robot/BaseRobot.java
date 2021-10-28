@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.Robot;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 
 public abstract class BaseRobot implements IRobot {
@@ -32,7 +30,7 @@ public abstract class BaseRobot implements IRobot {
    * @return List of subsystems in this robot, with ALL SENSORS EARLIER IN THE LIST THAN ALL
    * NON-SENSOR SUBSYSTEMS
    */
-  abstract List<ISubsystem> genSubsystems(HardwareMap hwMap, Mode mode);
+  abstract List<ISubsystem> genSubsystems(HardwareMap hwMap, StartParameters.Mode mode);
 
   private void autoInit(HardwareMap hwMap) {
     for (ISubsystem sub : subsystemList) {

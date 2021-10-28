@@ -4,7 +4,7 @@ import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsystem;
 
 public class Rev2M extends ASubsystem implements ISensor<Double> {
@@ -14,7 +14,7 @@ public class Rev2M extends ASubsystem implements ISensor<Double> {
 
   private boolean isInit = false;
 
-  public Rev2M(HardwareMap hwMap, Mode mode, DistanceUnit unit) {
+  public Rev2M(HardwareMap hwMap, StartParameters.Mode mode, DistanceUnit unit) {
     super(hwMap, mode);
     this.unit = unit;
   }

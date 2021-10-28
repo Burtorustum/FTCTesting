@@ -4,17 +4,16 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.OpMode.AOpMode;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.OpMode.Auton.AutonStates.GyroTurn;
+import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
 import org.firstinspires.ftc.teamcode.OpMode.Teleop.TeleopStates.ATeleopState;
 import org.firstinspires.ftc.teamcode.Robot.IRobot;
 import org.firstinspires.ftc.teamcode.Robot.MecanumDriveRobot;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Start;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.StartParameters;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Team;
+import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
@@ -24,7 +23,7 @@ public class PIDTuner extends AOpMode {
   @Override
   protected IRobot setupRobot() {
     return new MecanumDriveRobot(hardwareMap,
-        new StartParameters(Mode.TELEOP, Start.IRRELEVANT, Team.IRRELEVANT));
+        new StartParameters(StartParameters.Mode.TELEOP, StartParameters.Start.IRRELEVANT, StartParameters.Team.IRRELEVANT));
   }
 
   @Override
@@ -41,6 +40,7 @@ class TuneGyroPID extends ATeleopState {
   private final ElapsedTime timer;
 
   private double target, kp, ki, kd;
+  private boolean direction;
 
   public TuneGyroPID(GyroTurn turnState, Gamepad gp1, Gamepad gp2) {
     super(gp1, gp2);
@@ -52,6 +52,8 @@ class TuneGyroPID extends ATeleopState {
     this.kp = 0;
     this.ki = 0;
     this.kd = 0;
+
+    this.direction = false;
   }
 
   @Override
@@ -81,6 +83,11 @@ class TuneGyroPID extends ATeleopState {
         }
         this.timer.reset();
       }
+      else if (this.gp1.left_bumper) {
+        this.direction = !this.direction;
+        this.turnState.changeDirection(this.direction);
+        timer.reset();
+      }
     }
     if (this.gp1.right_trigger > 0.7) {
       this.turnState.setKVals(this.kp, this.ki, this.kd);
@@ -94,6 +101,7 @@ class TuneGyroPID extends ATeleopState {
       driveTrain.stop();
     }
   }
+
 
   @Override
   public void receiveGyro(IMUGyro gyro) {
@@ -109,6 +117,11 @@ class TuneGyroPID extends ATeleopState {
     telem.add("kd: " + this.kd);
 
     return telem;
+  }
+
+  @Override
+  public List<GamepadButtons> getButtons() {
+    return Arrays.asList(GamepadButtons.values());
   }
 }
 

@@ -8,10 +8,7 @@ import org.firstinspires.ftc.teamcode.OpMode.Auton.AutonStates.GyroTurn;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.IRobot;
 import org.firstinspires.ftc.teamcode.Robot.MecanumDriveRobot;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Start;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.StartParameters;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Team;
+import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 
 @TeleOp(name = "AutoRedCloseDuck", group = "Auton")
 //@Disabled
@@ -20,7 +17,7 @@ public class AutoRedCloseDuck extends AOpMode {
   @Override
   protected IRobot setupRobot() {
     return new MecanumDriveRobot(hardwareMap,
-        new StartParameters(Mode.AUTON, Start.CLOSEDUCK, Team.RED));
+        new StartParameters(StartParameters.Mode.AUTON, StartParameters.Start.CLOSEDUCK, StartParameters.Team.RED));
   }
 
   @Override

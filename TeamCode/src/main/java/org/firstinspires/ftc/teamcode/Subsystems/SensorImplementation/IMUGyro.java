@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
-import org.firstinspires.ftc.teamcode.Robot.RobotParameters.Mode;
+import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsystem;
 
 public class IMUGyro extends ASubsystem implements ISensor<Float> {
@@ -20,7 +20,7 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
 
   private boolean calibComplete = false;
 
-  public IMUGyro(HardwareMap hwMap, Mode mode) {
+  public IMUGyro(HardwareMap hwMap, StartParameters.Mode mode) {
     super(hwMap, mode);
   }
 

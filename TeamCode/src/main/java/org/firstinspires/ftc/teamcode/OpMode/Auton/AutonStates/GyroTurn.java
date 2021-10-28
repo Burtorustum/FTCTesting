@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.Rev2M;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
-public class GyroTurn extends ARobotState {
+public class GyroTurn extends AAutonState {
 
   private final MiniPID pid;
 
@@ -58,6 +58,10 @@ public class GyroTurn extends ARobotState {
 
   public void setTarget(double target) {
     this.pid.setSetpoint(target);
+  }
+
+  public void changeDirection(boolean reverse) {
+    this.pid.setDirection(reverse);
   }
 
 }

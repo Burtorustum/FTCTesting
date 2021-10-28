@@ -9,4 +9,5 @@ public interface IStateMachine {
    * @return Any telemetry from the executed states
    */
   List<String> iterate();
+
 }
