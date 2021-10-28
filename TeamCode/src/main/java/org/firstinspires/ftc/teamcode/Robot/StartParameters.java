@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Robot.RobotParameters;
+package org.firstinspires.ftc.teamcode.Robot;
 
 public class StartParameters {
     private final Mode mode;
@@ -21,5 +21,17 @@ public class StartParameters {
 
     public Team getTeam() {
         return team;
+    }
+
+    public enum Start {
+        CLOSEDUCK, FARDUCK, IRRELEVANT
+    }
+
+    public enum Team {
+        RED, BLUE, IRRELEVANT
+    }
+
+    public enum Mode {
+      AUTON, TELEOP
     }
 }
