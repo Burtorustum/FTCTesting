@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.OpMode.Auton.AutonStates;
 import java.util.ArrayList;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
+import org.firstinspires.ftc.teamcode.MiniPID.MiniPIDEx;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.Rev2M;
@@ -10,21 +11,19 @@ import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTr
 
 public class GyroTurn extends AAutonState {
 
-  private final MiniPID pid;
+  private final MiniPIDEx pid;
 
   private double lastHeading;
 
   public GyroTurn(double kp, double ki, double kd, double target, boolean turnRight) {
 
-    this.pid = new MiniPID(kp, ki, kd);
+    this.pid = new MiniPIDEx(kp, ki, kd);
     this.pid.setSetpoint(target);
-    this.pid.setSetpointRange(0.5);
     this.pid.setDirection(!turnRight); // can be changed based on how it turns
     // TODO: May need to check above line
     this.pid.setOutputLimits(-1, 1);
-    //this.pid.setOutputRampRate(.05);
 
-    // Deafult heading is 0
+    // Default heading is 0
     this.lastHeading = 0;
   }
 
@@ -43,7 +42,7 @@ public class GyroTurn extends AAutonState {
 
   @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
-    double pow = this.pid.getOutput(this.lastHeading);
+    double pow = this.pid.getOutputGyro(this.lastHeading);
     driveTrain.turnRight(pow);
   }
 

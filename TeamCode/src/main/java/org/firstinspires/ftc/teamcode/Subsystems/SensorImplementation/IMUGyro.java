@@ -32,7 +32,7 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
   public Float getOutput() {
     // Z is heading axis, rotation around vector through out the top/bottom of the rev hub
     float x = this.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZXY, AngleUnit.DEGREES).firstAngle;
-    // Normalize values to within 0 - 359
+    // Set values to within 0 - 359
     // want 0 heading to be at reset, -179 to be 181, -1 to be 359
     if (x < 0) {
       x = 360 + x;
