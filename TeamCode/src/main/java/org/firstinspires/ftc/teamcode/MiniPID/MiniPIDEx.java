@@ -10,7 +10,7 @@ public class MiniPIDEx extends MiniPID {
 
     /**
      *
-     * @param actual A gyro value in degrees between 0 and 359 inclusive
+     * @param actual A gyro value in degrees between 0 and 360 exclusive
      * @return PID output based on given sensor data and pre-given target and coefficients
      */
     public double getOutputGyro(double actual) {
