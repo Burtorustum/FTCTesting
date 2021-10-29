@@ -55,7 +55,7 @@ public class FieldCentricDrive extends ATeleopState {
         double clockwise = rStickX;
 
         // Apply the turn modifier
-        clockwise *= 1; //TODO: Test and see if should be lowered
+        clockwise *= 1; //Test and see if should be lowered / raised for desired control
 
         // Convert to Radians for Math.sin/cos
         double orient = Math.toRadians(curHeading);
@@ -73,7 +73,7 @@ public class FieldCentricDrive extends ATeleopState {
         double rlPow = forward + clockwise - strafe;
         double rrPow = forward - clockwise + strafe;
 
-        double max = Math.max(1, forward + strafe + clockwise);
+        double max = Math.max(1, Math.abs(forward) + Math.abs(strafe) + Math.abs(clockwise));
 
         // Clip power values to within acceptable ranges for the motors
         flPow /= max;
