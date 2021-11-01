@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.OpMode.Auton.AutonStates;
 
+import com.qualcomm.robotcore.util.Range;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.MiniPID.MiniPID;
@@ -21,7 +23,7 @@ public class GyroTurn extends AAutonState {
     this.pid.setSetpoint(target);
     this.pid.setDirection(!turnRight); // can be changed based on how it turns
     // TODO: May need to check above line
-    this.pid.setOutputLimits(-1, 1);
+    this.pid.setOutputLimits(-.7, .7);
 
     // Default heading is 0
     this.lastHeading = 0;

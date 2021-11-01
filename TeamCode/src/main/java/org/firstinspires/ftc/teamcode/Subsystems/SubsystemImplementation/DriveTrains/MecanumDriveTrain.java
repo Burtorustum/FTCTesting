@@ -25,11 +25,13 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
   @Override
   public void autoInit(HardwareMap hwMap) {
     this.generalInit(hwMap);
+    this.setMotorZeroPower(ZeroPowerBehavior.BRAKE);
   }
 
   @Override
   public void teleopInit(HardwareMap hwMap) {
     this.generalInit(hwMap);
+    this.setMotorZeroPower(ZeroPowerBehavior.BRAKE);
   }
 
   private void generalInit(HardwareMap hwMap) {

@@ -48,7 +48,7 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
     Parameters parameters = new Parameters();
     parameters.calibrationDataFile = "BNO055IMUCalibration.json";
     parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-    parameters.mode = SensorMode.GYRONLY;
+    //parameters.mode = SensorMode.GYRONLY;
     parameters.loggingEnabled = true;
     parameters.loggingTag = "IMU";
 
@@ -62,7 +62,7 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
     Parameters parameters = new Parameters();
     parameters.calibrationDataFile = "BNO055IMUCalibration.json";
     parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-    parameters.mode = SensorMode.GYRONLY;
+    //parameters.mode = SensorMode.GYRONLY;
 
     // Ideally don't need to re-calibrate bc should be calibrated from auton
     this.gyro.initialize(parameters);

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.OpMode.Auton;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Robot.IRobot;
 import org.firstinspires.ftc.teamcode.Robot.MecanumDriveRobot;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 
-@TeleOp(name = "AutoRedCloseDuck", group = "Auton")
+@Autonomous(name = "AutoRedCloseDuck", group = "Auton")
 //@Disabled
 public class AutoRedCloseDuck extends AOpMode {
 
