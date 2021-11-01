@@ -16,6 +16,8 @@ public class GyroTurn extends AAutonState {
   private final MiniPIDEx pid;
 
   private double lastHeading;
+  private double lastOutput;
+  private int withinToleranceCount;
 
   public GyroTurn(double kp, double ki, double kd, double target, boolean turnRight) {
 
@@ -27,24 +29,33 @@ public class GyroTurn extends AAutonState {
 
     // Default heading is 0
     this.lastHeading = 0;
+    this.lastOutput = 0;
+    this.withinToleranceCount = 0;
   }
 
   @Override
   public boolean finishedExecution() {
-    return this.pid.getOutput() == 0;
+    return this.withinToleranceCount >= 5;
   }
 
   @Override
   public List<String> getTelemetry() {
     List<String> telem = new ArrayList<String>();
-    telem.add("PID output: " + this.pid.getOutput());
+    telem.add("PID output: " + this.lastOutput);
     telem.add("Heading: " + this.lastHeading);
+    telem.add("Within tolerance? " + this.finishedExecution());
     return telem;
   }
 
   @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
     double pow = this.pid.getOutputGyro(this.lastHeading);
+    if (pow < 0.05) {
+      this.withinToleranceCount++;
+    } else {
+      this.withinToleranceCount = 0;
+    }
+    this.lastOutput = pow;
     driveTrain.turnRight(pow);
   }
 
