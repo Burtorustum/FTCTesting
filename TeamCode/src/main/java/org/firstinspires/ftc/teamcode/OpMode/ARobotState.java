@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.OpMode;
 import java.util.List;
 
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
+import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.Rev2M;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
@@ -24,6 +25,12 @@ public abstract class ARobotState {
    * @return a list of buttons on the gamepad used in the execution of this state.
    */
   public abstract List<GamepadButtons> getButtons();
+
+  /**
+   * TODO: Make this better, rn very annoying
+   * @return a list of class files that this state modifies
+   */
+  public abstract List<Class<? extends ISubsystem>> getSubsystems();
 
   // NEED METHOD FOR EVERY SUBSYSTEM
 

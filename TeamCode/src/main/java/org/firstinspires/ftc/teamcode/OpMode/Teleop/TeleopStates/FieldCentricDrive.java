@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
+import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.DTMotorPos;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
@@ -32,6 +33,15 @@ public class FieldCentricDrive extends ATeleopState {
         buttons.add(GamepadButtons.GAMEPAD_1_RSX);
 
         return buttons;
+    }
+
+    @Override
+    public List<Class<? extends ISubsystem>> getSubsystems() {
+        List<Class<? extends ISubsystem>> subsystemClasses = new ArrayList<>();
+        subsystemClasses.add(IMUGyro.class);
+        subsystemClasses.add(MecanumDriveTrain.class);
+
+        return subsystemClasses;
     }
 
     @Override

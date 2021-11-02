@@ -10,7 +10,7 @@ public class MiniPIDEx extends MiniPID {
 
     /**
      *
-     * @param actual A gyro value in degrees between 0 and 360 exclusive
+     * @param actual A gyro value in degrees 0 <= actual < 360
      * @return PID output based on given sensor data and pre-given target and coefficients
      */
     public double getOutputGyro(double actual) {
@@ -93,8 +93,6 @@ public class MiniPIDEx extends MiniPID {
 
         // Get a test printline with lots of details about the internal
         // calculations. This can be useful for debugging.
-        // System.out.printf("Final output %5.2f [ %5.2f, %5.2f , %5.2f  ], eSum %.2f\n",output,Poutput, Ioutput, Doutput,errorSum );
-        // System.out.printf("%5.2f\t%5.2f\t%5.2f\t%5.2f\n",output,Poutput, Ioutput, Doutput );
 
         lastOutput=output;
         return output;

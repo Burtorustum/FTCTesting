@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsystem;
@@ -154,6 +155,11 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
     this.BR.setZeroPowerBehavior(behavior);
     this.FL.setZeroPowerBehavior(behavior);
     this.FR.setZeroPowerBehavior(behavior);
+  }
+
+  @Override
+  public boolean runToDistance(int distance, DistanceUnit units) {
+    return false;
   }
 
   public void setFLPower(double power) {

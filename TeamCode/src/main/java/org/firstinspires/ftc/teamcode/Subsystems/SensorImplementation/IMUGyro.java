@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU.Parameters;
-import com.qualcomm.hardware.bosch.BNO055IMU.SensorMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ReadWriteFile;
 import java.io.File;

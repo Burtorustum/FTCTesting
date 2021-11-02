@@ -10,6 +10,7 @@ package org.firstinspires.ftc.teamcode.MiniPID;
  *
  * @see <a href="http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-direction/improving-the-beginners-pid-introduction">http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-direction/improving-the-beginners-pid-introduction</a>
  */
+@SuppressWarnings("CommentedOutCode")
 public class MiniPID {
     //**********************************
     // Class protected variables

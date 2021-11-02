@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.OpMode.Teleop.TeleopStates.ATeleopState;
 import org.firstinspires.ftc.teamcode.Robot.IRobot;
 import org.firstinspires.ftc.teamcode.Robot.MecanumDriveRobot;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
+import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
@@ -121,7 +122,12 @@ class TuneGyroPID extends ATeleopState {
 
   @Override
   public List<GamepadButtons> getButtons() {
-    return Arrays.asList(GamepadButtons.values());
+    return Arrays.asList(GamepadButtons.values()); // This state must be run independently of any other opmode that uses the gamepad
+  }
+
+  @Override
+  public List<Class<? extends ISubsystem>> getSubsystems() {
+    return this.turnState.getSubsystems();
   }
 }
 

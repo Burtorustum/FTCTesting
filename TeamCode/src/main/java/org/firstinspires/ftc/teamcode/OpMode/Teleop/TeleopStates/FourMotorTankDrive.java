@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
-import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
+import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
 
 public class FourMotorTankDrive extends ATeleopState {
@@ -26,6 +26,14 @@ public class FourMotorTankDrive extends ATeleopState {
     buttons.add(GamepadButtons.GAMEPAD_1_RSY);
 
     return buttons;
+  }
+
+  @Override
+  public List<Class<? extends ISubsystem>> getSubsystems() {
+    List<Class<? extends ISubsystem>> subsystemClasses = new ArrayList<>();
+    subsystemClasses.add(MecanumDriveTrain.class);
+
+    return subsystemClasses;
   }
 
   @Override
