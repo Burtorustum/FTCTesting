@@ -5,6 +5,9 @@ import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.sun.tools.javac.util.Pair;
+import java.util.ArrayList;
+import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
@@ -52,26 +55,6 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
   }
 
   @Override
-  public void autoInitLoop() {
-
-  }
-
-  @Override
-  public void teleopInitLoop() {
-
-  }
-
-  @Override
-  public void autoStart() {
-
-  }
-
-  @Override
-  public void teleopStart() {
-
-  }
-
-  @Override
   public void stop() {
     FL.setPower(0);
     BL.setPower(0);
@@ -90,22 +73,6 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
   }
 
   @Override
-  public void driveStraight(double power) {
-    FL.setPower(power);
-    BL.setPower(power);
-    FR.setPower(power);
-    BR.setPower(power);
-  }
-
-  @Override
-  public void turnLeft(double power) {
-    FL.setPower(-power);
-    BL.setPower(-power);
-    FR.setPower(power);
-    BR.setPower(power);
-  }
-
-  @Override
   public void turnRight(double power) {
     FL.setPower(power);
     BL.setPower(power);
@@ -114,28 +81,28 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
   }
 
   @Override
-  public void setMotorPower(DTMotorPos[] positions, double[] powers) {
-    if (powers.length != 4 || positions.length != 4) {
+  public void setMotorPower(List<Pair<DTMotorPos, Double>> powers) {
+    if (powers.size() != 4) {
       throw new IllegalArgumentException(
           "must give 4 power values and 4 proper motor positions for a mecanum drivetrain.");
     }
-    for (int i = 0; i < 4; i++) {
-      switch (positions[i]) {
+    for (Pair<DTMotorPos, Double> pair : powers) {
+      switch (pair.fst) {
         case BACK_LEFT:
-          this.BL.setPower(powers[i]);
+          this.BL.setPower(pair.snd);
           break;
         case BACK_RIGHT:
-          this.BR.setPower(powers[i]);
+          this.BR.setPower(pair.snd);
           break;
         case FRONT_LEFT:
-          this.FL.setPower(powers[i]);
+          this.FL.setPower(pair.snd);
           break;
         case FRONT_RIGHT:
-          this.FR.setPower(powers[i]);
+          this.FR.setPower(pair.snd);
           break;
         default:
           throw new IllegalArgumentException(
-              "Given position is not valid for mecanum DT: " + positions[i].name());
+              "Given motor position is not valid for mecanum DT: " + pair.fst.name());
       }
     }
 
@@ -158,8 +125,42 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
   }
 
   @Override
-  public boolean runToDistance(int distance, DistanceUnit units) {
-    return false;
+  public void setTargetPosition(List<Pair<DTMotorPos, Integer>> targets) {
+    if (targets.size() != 4) {
+      throw new IllegalArgumentException(
+          "must give exactly 4 target positions for a mecanum drivetrain.");
+    }
+    for (Pair<DTMotorPos, Integer> pair : targets) {
+      switch (pair.fst) {
+        case BACK_LEFT:
+          this.BL.setTargetPosition(pair.snd);
+          break;
+        case BACK_RIGHT:
+          this.BR.setTargetPosition(pair.snd);
+          break;
+        case FRONT_LEFT:
+          this.FL.setTargetPosition(pair.snd);
+          break;
+        case FRONT_RIGHT:
+          this.FR.setTargetPosition(pair.snd);
+          break;
+        default:
+          throw new IllegalArgumentException(
+              "Given motor position is not valid for mecanum DT: " + pair.fst.name());
+      }
+    }
+  }
+
+  @Override
+  public List<Pair<DTMotorPos, Integer>> getCurrentPosition() {
+    ArrayList<Pair<DTMotorPos, Integer>> positions = new ArrayList<>();
+
+    positions.add(new Pair<>(DTMotorPos.FRONT_LEFT, this.FL.getCurrentPosition()));
+    positions.add(new Pair<>(DTMotorPos.FRONT_RIGHT, this.FR.getCurrentPosition()));
+    positions.add(new Pair<>(DTMotorPos.BACK_LEFT, this.BL.getCurrentPosition()));
+    positions.add(new Pair<>(DTMotorPos.BACK_RIGHT, this.BR.getCurrentPosition()));
+
+    return positions;
   }
 
   public void setFLPower(double power) {

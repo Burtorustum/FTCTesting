@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.OpMode.Teleop.TeleopStates;
 
+import com.sun.tools.javac.util.Pair;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import java.util.ArrayList;
@@ -46,10 +47,7 @@ public class FieldCentricDrive extends ATeleopState {
 
     @Override
     public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
-        driveTrain.setMotorPower(new DTMotorPos[]{DTMotorPos.FRONT_LEFT, DTMotorPos.FRONT_RIGHT,
-                        DTMotorPos.BACK_LEFT, DTMotorPos.BACK_RIGHT},
-                this.fieldCentricDrive(gp1.left_stick_y, gp1.left_stick_x,
-                        gp1.right_stick_x, this.curHeading));
+        driveTrain.setMotorPower(this.fieldCentricDrive(gp1.left_stick_y, gp1.left_stick_x, gp1.right_stick_x, this.curHeading));
 
     }
 
@@ -58,7 +56,7 @@ public class FieldCentricDrive extends ATeleopState {
         this.curHeading = gyro.getOutput();
     }
 
-    private double[] fieldCentricDrive(double lStickY, double lStickX, double rStickX, double curHeading) {
+    private List<Pair<DTMotorPos, Double>> fieldCentricDrive(double lStickY, double lStickX, double rStickX, double curHeading) {
         // Get the controller values
         double forward = (-1) * lStickY;
         double strafe = lStickX;
@@ -80,7 +78,7 @@ public class FieldCentricDrive extends ATeleopState {
         // Set power values
         double flPow = forward + clockwise + strafe;
         double frPow = forward - clockwise - strafe;
-        double rlPow = forward + clockwise - strafe;
+        double blPow = forward + clockwise - strafe;
         double rrPow = forward - clockwise + strafe;
 
         double max = Math.max(1, Math.abs(forward) + Math.abs(strafe) + Math.abs(clockwise));
@@ -88,10 +86,15 @@ public class FieldCentricDrive extends ATeleopState {
         // Clip power values to within acceptable ranges for the motors
         flPow /= max;
         frPow /= max;
-        rlPow /= max;
+        blPow /= max;
         rrPow /= max;
 
         // Send power values to motors
-        return new double[]{flPow, frPow, rlPow, rrPow};
+        List<Pair<DTMotorPos, Double>> powers = new ArrayList<>();
+        powers.add(new Pair<>(DTMotorPos.FRONT_LEFT, flPow));
+        powers.add(new Pair<>(DTMotorPos.FRONT_RIGHT, frPow));
+        powers.add(new Pair<>(DTMotorPos.BACK_LEFT, blPow));
+        powers.add(new Pair<>(DTMotorPos.BACK_RIGHT, rrPow));
+        return powers;
     }
 }

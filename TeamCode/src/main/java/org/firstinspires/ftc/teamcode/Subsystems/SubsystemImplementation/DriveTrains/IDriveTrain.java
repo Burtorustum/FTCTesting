@@ -2,23 +2,46 @@ package org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveT
 
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import com.sun.tools.javac.util.Pair;
+import java.util.List;
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 
 public interface IDriveTrain extends ISubsystem {
 
-  void driveStraight(double power);
-
-  void turnLeft(double power);
-
+  /**
+   *
+   * @param power
+   */
   void turnRight(double power);
 
-  void setMotorPower(DTMotorPos[] positions, double[] powers);
+  /**
+   *
+   * @param powers
+   */
+  void setMotorPower(List<Pair<DTMotorPos, Double>> powers);
 
+  /**
+   *
+   * @param motorMode
+   */
   void setMotorRunMode(RunMode motorMode);
 
+  /**
+   *
+   * @param behavior
+   */
   void setMotorZeroPower(ZeroPowerBehavior behavior);
 
-  boolean runToDistance(int distance, DistanceUnit units); // Make it take a position on the field
+  /**
+   *
+   * @param targets
+   */
+  void setTargetPosition(List<Pair<DTMotorPos, Integer>> targets);
+
+  /**
+   *
+   * @return
+   */
+  List<Pair<DTMotorPos, Integer>> getCurrentPosition();
 
 }
