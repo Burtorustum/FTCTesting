@@ -105,7 +105,6 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
               "Given motor position is not valid for mecanum DT: " + pair.fst.name());
       }
     }
-
   }
 
   @Override
