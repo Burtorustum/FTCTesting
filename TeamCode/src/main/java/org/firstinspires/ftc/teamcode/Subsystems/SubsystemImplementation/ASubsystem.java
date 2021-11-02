@@ -18,4 +18,23 @@ public abstract class ASubsystem implements ISubsystem {
   }
 
 
+  @Override
+  public void autoInitLoop() {
+
+  }
+
+  @Override
+  public void teleopInitLoop() {
+
+  }
+
+  @Override
+  public void autoStart() {
+
+  }
+
+  @Override
+  public void teleopStart() {
+
+  }
 }
