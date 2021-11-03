@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.MiniPID;
+package org.firstinspires.ftc.teamcode.Utility.MiniPID;
 
 /**
  * Small, easy to use PID implementation with advanced controller capability.<br>
