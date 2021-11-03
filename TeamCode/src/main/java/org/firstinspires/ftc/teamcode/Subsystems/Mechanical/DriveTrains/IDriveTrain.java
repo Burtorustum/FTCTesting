@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains;
+package org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains;
 
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;

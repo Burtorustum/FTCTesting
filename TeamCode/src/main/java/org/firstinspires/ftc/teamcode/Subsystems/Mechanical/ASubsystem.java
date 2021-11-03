@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation;
+package org.firstinspires.ftc.teamcode.Subsystems.Mechanical;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 

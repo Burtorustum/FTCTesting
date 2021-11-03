@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation;
+package org.firstinspires.ftc.teamcode.Subsystems.Sensors;
 
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.Utility.MiniPID.MiniPIDEx;
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
-import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMUGyro;
+import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
 
 public class GyroTurn extends AAutonState {
 

@@ -15,8 +15,8 @@ import org.firstinspires.ftc.teamcode.Robot.IRobot;
 import org.firstinspires.ftc.teamcode.Robot.MecanumDriveRobot;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation.IMUGyro;
-import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMUGyro;
+import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
 
 @TeleOp(name = "PID Turn Tuner", group = "Tuning")
 public class PIDTuner extends AOpMode {

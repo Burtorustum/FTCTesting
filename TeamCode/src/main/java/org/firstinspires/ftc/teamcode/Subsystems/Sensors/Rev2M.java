@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode.Subsystems.SensorImplementation;
+package org.firstinspires.ftc.teamcode.Subsystems.Sensors;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
-import org.firstinspires.ftc.teamcode.Subsystems.SubsystemImplementation.ASubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.ASubsystem;
 
 public class Rev2M extends ASubsystem implements ISensor<Double> {
 
