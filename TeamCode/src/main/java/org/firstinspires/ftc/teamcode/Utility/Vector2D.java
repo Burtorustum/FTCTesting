@@ -1,11 +1,8 @@
 package org.firstinspires.ftc.teamcode.Utility;
 
-import androidx.annotation.NonNull;
-import java.util.Iterator;
-import java.util.Vector;
-
 public class Vector2D {
-  public double x, y;
+  public final double x;
+  public final double y;
 
   public Vector2D(double x, double y) {
     this.x = x;
@@ -31,7 +28,7 @@ public class Vector2D {
 
   @Override
   public String toString() {
-    return "(" + Double.toString(x) + ", " + Double.toString(y) + ")";
+    return "(" + x + ", " + y + ")";
   }
 
 }
