@@ -17,7 +17,7 @@ public class MecanumDriveRobot extends BaseRobot {
   protected ArrayList<ISubsystem> genSubsystems(HardwareMap hwMap, StartParameters.Mode mode) {
     ArrayList<ISubsystem> subsystems = new ArrayList<>();
 
-    subsystems.add(new IMUGyro(hwMap, mode));
+    subsystems.add(new IMUGyro(hwMap, mode, "imu"));
     subsystems.add(new MecanumDriveTrain(hwMap, mode));
 
     return subsystems;

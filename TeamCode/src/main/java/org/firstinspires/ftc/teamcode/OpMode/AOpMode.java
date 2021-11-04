@@ -56,8 +56,8 @@ public abstract class AOpMode extends OpMode {
 
   @Override
   public void loop() {
-    List<String> telem = this.stateMachine.iterate();
-    for (String s : telem) {
+    List<String> outTelemetry = this.stateMachine.iterate();
+    for (String s : outTelemetry) {
       this.telemetry.addLine(s);
     }
     this.telemetry.update();

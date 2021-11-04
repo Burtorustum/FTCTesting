@@ -13,15 +13,6 @@ public abstract class BaseRobot implements IRobot {
   public BaseRobot(HardwareMap hwMap, StartParameters params) {
     this.params = params;
     this.subsystemList = this.genSubsystems(hwMap, this.params.getMode());
-
-    switch (this.params.getMode()) {
-      case AUTON:
-        this.autoInit(hwMap);
-        break;
-      case TELEOP:
-        this.teleopInit(hwMap);
-        break;
-    }
   }
 
   /**
@@ -31,18 +22,6 @@ public abstract class BaseRobot implements IRobot {
    * NON-SENSOR SUBSYSTEMS
    */
   abstract List<ISubsystem> genSubsystems(HardwareMap hwMap, StartParameters.Mode mode);
-
-  private void autoInit(HardwareMap hwMap) {
-    for (ISubsystem sub : subsystemList) {
-      sub.autoInit(hwMap);
-    }
-  }
-
-  private void teleopInit(HardwareMap hwMap) {
-    for (ISubsystem sub : subsystemList) {
-      sub.teleopInit(hwMap);
-    }
-  }
 
   @Override
   public void initLoop() {

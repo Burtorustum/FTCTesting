@@ -5,10 +5,6 @@ import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 
 public interface ISubsystem {
 
-  void autoInit(HardwareMap hwMap);
-
-  void teleopInit(HardwareMap hwMap);
-
   void autoInitLoop();
 
   void teleopInitLoop();

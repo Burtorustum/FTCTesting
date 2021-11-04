@@ -11,17 +11,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
-import org.firstinspires.ftc.teamcode.Subsystems.ASubsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ISensor;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
 
-public class IMUGyro extends ASubsystem implements ISensor<Float> {
+public class IMUGyro extends ASensor<Float> {
 
   private BNO055IMU gyro;
 
   private boolean calibComplete = false;
 
-  public IMUGyro(HardwareMap hwMap, StartParameters.Mode mode) {
-    super(hwMap, mode);
+  public IMUGyro(HardwareMap hwMap, StartParameters.Mode mode, String configName) {
+    super(hwMap, mode, configName);
   }
 
   /**
@@ -42,8 +41,8 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
   }
 
   @Override
-  public void autoInit(HardwareMap hwMap) {
-    this.gyro = hwMap.get(BNO055IMU.class, "imu");
+  public void autoInit(HardwareMap hwMap, String configName) {
+    this.gyro = hwMap.get(BNO055IMU.class, configName);
 
     Parameters parameters = new Parameters();
     parameters.calibrationDataFile = "BNO055IMUCalibration.json";
@@ -56,8 +55,8 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
   }
 
   @Override
-  public void teleopInit(HardwareMap hwMap) {
-    this.gyro = hwMap.get(BNO055IMU.class, "imu");
+  public void teleopInit(HardwareMap hwMap, String configName) {
+    this.gyro = hwMap.get(BNO055IMU.class, configName);
 
     Parameters parameters = new Parameters();
     parameters.calibrationDataFile = "BNO055IMUCalibration.json";
@@ -78,26 +77,6 @@ public class IMUGyro extends ASubsystem implements ISensor<Float> {
       ReadWriteFile.writeFile(file, calibrationData.serialize());
       this.calibComplete = true;
     }
-  }
-
-  @Override
-  public void teleopInitLoop() {
-
-  }
-
-  @Override
-  public void autoStart() {
-
-  }
-
-  @Override
-  public void teleopStart() {
-
-  }
-
-  @Override
-  public void stop() {
-
   }
 
   @Override

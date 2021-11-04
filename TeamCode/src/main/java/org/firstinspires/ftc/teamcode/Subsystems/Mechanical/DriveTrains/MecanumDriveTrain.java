@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
-import org.firstinspires.ftc.teamcode.Subsystems.ASubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.AMechanicalSubsystem;
 
-public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
+public class MecanumDriveTrain extends AMechanicalSubsystem implements IDriveTrain {
 
   private final double encoderTicksPerRotation = 537.6;
   private final int gearRatio = 1;
@@ -26,13 +26,13 @@ public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
   }
 
   @Override
-  public void autoInit(HardwareMap hwMap) {
+  protected void autoInit(HardwareMap hwMap) {
     this.generalInit(hwMap);
     this.setMotorZeroPower(ZeroPowerBehavior.BRAKE);
   }
 
   @Override
-  public void teleopInit(HardwareMap hwMap) {
+  protected void teleopInit(HardwareMap hwMap) {
     this.generalInit(hwMap);
     this.setMotorZeroPower(ZeroPowerBehavior.BRAKE);
   }
