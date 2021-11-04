@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-public class StateMachine implements IStateMachine {
+public class PriorityStateMachine implements IStateMachine {
 
     private final IRobot robot;
     private final StatePriorityMap priorityMap;
@@ -28,7 +28,7 @@ public class StateMachine implements IStateMachine {
      *                   and second a state for the robot to perform.
      *                   Pair(Integer >= 0, complete RobotState object).
      */
-    public StateMachine(IRobot robot, Collection<Pair<Integer,ARobotState>> statePairs) {
+    public PriorityStateMachine(IRobot robot, Collection<Pair<Integer,ARobotState>> statePairs) {
         this.robot = robot;
         this.priorityMap = new StatePriorityMap(statePairs);
 

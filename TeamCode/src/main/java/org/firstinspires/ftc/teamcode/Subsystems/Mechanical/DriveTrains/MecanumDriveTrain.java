@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
-import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.ASubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.ASubsystem;
 
 public class MecanumDriveTrain extends ASubsystem implements IDriveTrain {
 

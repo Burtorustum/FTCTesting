@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems.Sensors;
+package org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU.Parameters;
@@ -11,7 +11,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
-import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.ASubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.ASubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ISensor;
 
 public class IMUGyro extends ASubsystem implements ISensor<Float> {
 

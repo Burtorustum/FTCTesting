@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMUGyro;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Rev2M;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU.IMUGyro;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Distance.Rev2M;
 import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
 
 // COULD MAKE SEPARATE ABSTRACT CLASS FOR EACH ROBOT ITERATION, REDUCING NUMBER OF METHODS NEEDING TO BE WRITTEN

@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.IStateMachine;
-import org.firstinspires.ftc.teamcode.OpMode.StateMachine.StateMachine;
+import org.firstinspires.ftc.teamcode.OpMode.StateMachine.PriorityStateMachine;
 import org.firstinspires.ftc.teamcode.Robot.IRobot;
 
 public abstract class AOpMode extends OpMode {
@@ -29,7 +29,7 @@ public abstract class AOpMode extends OpMode {
   protected abstract Collection<Pair<Integer, ARobotState>> setupStates();
 
   private void setupStateMachine() {
-    this.stateMachine = new StateMachine(this.robot, this.setupStates());
+    this.stateMachine = new PriorityStateMachine(this.robot, this.setupStates());
   }
 
   @Override

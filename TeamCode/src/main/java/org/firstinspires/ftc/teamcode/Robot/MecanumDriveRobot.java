@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.ArrayList;
 
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMUGyro;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
 
 public class MecanumDriveRobot extends BaseRobot {
