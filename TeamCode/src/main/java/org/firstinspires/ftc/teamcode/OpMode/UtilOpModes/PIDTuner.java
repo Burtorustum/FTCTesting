@@ -3,8 +3,11 @@ package org.firstinspires.ftc.teamcode.OpMode.UtilOpModes;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.sun.tools.javac.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.OpMode.AOpMode;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
@@ -28,10 +31,10 @@ public class PIDTuner extends AOpMode {
   }
 
   @Override
-  protected List<ARobotState> setupStates() {
-    List<ARobotState> stateList = new ArrayList<>();
-    stateList.add(new TuneGyroPID(new GyroTurn(.4,0,10, 180, .05, true),
-        gamepad1, gamepad2));
+  protected Collection<Pair<Integer, ARobotState>> setupStates() {
+    List<Pair<Integer, ARobotState>> stateList = new ArrayList<>();
+    stateList.add(new Pair<>(0, new TuneGyroPID(new GyroTurn(.4,0,10, 180, .05, true),
+        gamepad1, gamepad2)));
     return stateList;
   }
 }

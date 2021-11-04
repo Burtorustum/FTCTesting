@@ -32,30 +32,6 @@ public class Rev2M extends ASubsystem implements ISensor<Double> {
   }
 
   @Override
-  public void autoInitLoop() {
-
-  }
-
-  @Override
-  public void teleopInitLoop() {
-
-  }
-
-  @Override
-  public void autoStart() {
-  }
-
-  @Override
-  public void teleopStart() {
-
-  }
-
-  @Override
-  public void stop() {
-
-  }
-
-  @Override
   public void dispatchState(ARobotState robotState) {
     robotState.receiveRev2m(this);
   }

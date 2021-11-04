@@ -37,4 +37,9 @@ public abstract class ASubsystem implements ISubsystem {
   public void teleopStart() {
 
   }
+
+  @Override
+  public void stop() {
+
+  }
 }

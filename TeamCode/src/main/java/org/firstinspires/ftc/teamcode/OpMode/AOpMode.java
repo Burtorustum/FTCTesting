@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.teamcode.OpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.sun.tools.javac.util.Pair;
+
+import java.util.Collection;
 import java.util.List;
-import org.firstinspires.ftc.teamcode.OpMode.StateMachine.AutonStateMachine;
+
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.IStateMachine;
-import org.firstinspires.ftc.teamcode.OpMode.StateMachine.TeleopStateMachine;
+import org.firstinspires.ftc.teamcode.OpMode.StateMachine.StateMachine;
 import org.firstinspires.ftc.teamcode.Robot.IRobot;
 
 public abstract class AOpMode extends OpMode {
@@ -23,17 +26,10 @@ public abstract class AOpMode extends OpMode {
    *
    * @return A list of states for this robot to iterate through in this OpMode. If an autonomous mode the states must be given in the order to be executed. If teleop order within the list does not matter.
    */
-  protected abstract List<ARobotState> setupStates();
+  protected abstract Collection<Pair<Integer, ARobotState>> setupStates();
 
   private void setupStateMachine() {
-    switch(this.robot.getParams().getMode()) {
-      case TELEOP:
-        this.stateMachine = new TeleopStateMachine(this.robot, this.setupStates());
-        break;
-      case AUTON:
-        this.stateMachine = new AutonStateMachine(this.robot, this.setupStates());
-        break;
-    }
+    this.stateMachine = new StateMachine(this.robot, this.setupStates());
   }
 
   @Override
