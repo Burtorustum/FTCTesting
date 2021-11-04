@@ -2,8 +2,9 @@ package org.firstinspires.ftc.teamcode.Subsystems.Sensors;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
+import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 
-public abstract class ASensor<T> implements ISensor<T> {
+public abstract class ASensor<T> implements ISubsystem {
 
   public ASensor(HardwareMap hwMap, StartParameters.Mode mode, String configName) {
     switch (mode) {
@@ -20,6 +21,8 @@ public abstract class ASensor<T> implements ISensor<T> {
   protected abstract void autoInit(HardwareMap hwMap, String configName);
 
   protected abstract void teleopInit(HardwareMap hwMap, String configName);
+
+  public abstract T getOutput();
 
   @Override
   public void autoInitLoop() {}
