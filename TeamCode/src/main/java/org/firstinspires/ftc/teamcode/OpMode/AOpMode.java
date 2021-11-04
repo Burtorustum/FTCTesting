@@ -6,13 +6,12 @@ import com.sun.tools.javac.util.Pair;
 import java.util.Collection;
 import java.util.List;
 
-import org.firstinspires.ftc.teamcode.OpMode.StateMachine.IStateMachine;
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.PriorityStateMachine;
 import org.firstinspires.ftc.teamcode.Robot.IRobot;
 
 public abstract class AOpMode extends OpMode {
   private IRobot robot;
-  private IStateMachine stateMachine;
+  private PriorityStateMachine stateMachine;
 
   private boolean isInitialized = false;
 

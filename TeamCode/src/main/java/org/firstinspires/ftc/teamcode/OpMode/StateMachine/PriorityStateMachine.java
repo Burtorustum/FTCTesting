@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-public class PriorityStateMachine implements IStateMachine {
+public class PriorityStateMachine{
 
     private final IRobot robot;
     private final StatePriorityMap priorityMap;
@@ -36,7 +36,6 @@ public class PriorityStateMachine implements IStateMachine {
         this.currentPriority = 0;
     }
 
-    @Override
     public List<String> iterate() {
         if (this.firstRun) {
             if (this.doButtonsOverlap()) {
