@@ -53,15 +53,6 @@ public class GyroTurn extends AAutonState {
   }
 
   @Override
-  public List<Class<? extends ISubsystem>> getSubsystems() {
-    List<Class<? extends ISubsystem>> subsystemClasses = new ArrayList<>();
-    subsystemClasses.add(IMUGyro.class);
-    subsystemClasses.add(MecanumDriveTrain.class);
-
-    return subsystemClasses;
-  }
-
-  @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
     double pow = this.pid.getOutputGyro(this.lastHeading);
     if (pow < this.tolerance) {

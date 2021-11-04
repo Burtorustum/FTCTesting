@@ -37,15 +37,6 @@ public class FieldCentricDrive extends ATeleopState {
     }
 
     @Override
-    public List<Class<? extends ISubsystem>> getSubsystems() {
-        List<Class<? extends ISubsystem>> subsystemClasses = new ArrayList<>();
-        subsystemClasses.add(IMUGyro.class);
-        subsystemClasses.add(MecanumDriveTrain.class);
-
-        return subsystemClasses;
-    }
-
-    @Override
     public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
         driveTrain.setMotorPower(this.fieldCentricDrive(gp1.left_stick_y, gp1.left_stick_x, gp1.right_stick_x, this.curHeading));
 

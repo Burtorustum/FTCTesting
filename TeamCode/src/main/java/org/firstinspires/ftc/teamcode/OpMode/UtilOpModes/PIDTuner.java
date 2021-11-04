@@ -133,10 +133,6 @@ class TuneGyroPID extends ATeleopState {
     return Arrays.asList(GamepadButtons.values()); // This state must be run independently of any other opmode that uses the gamepad
   }
 
-  @Override
-  public List<Class<? extends ISubsystem>> getSubsystems() {
-    return this.turnState.getSubsystems();
-  }
 }
 
 

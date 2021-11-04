@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Distance.MRRange;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Distance.Rev2M;
 import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.MRTouch;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.RevMagneticLimitSwitch;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.RevTouch;
 
@@ -56,6 +57,8 @@ public abstract class ARobotState {
   public void receiveRevMagLimSwitch(RevMagneticLimitSwitch mag) {}
 
   public void receiveRevTouchSensor(RevTouch touch) {}
+
+  public void receiveMRTouchSensor(MRTouch touch) {}
 
   // Color:
 

@@ -26,8 +26,5 @@ public class EncoderTestState extends ARobotState {
         return new ArrayList<>();
     }
 
-    @Override
-    public List<Class<? extends ISubsystem>> getSubsystems() {
-        return null;
-    }
+
 }

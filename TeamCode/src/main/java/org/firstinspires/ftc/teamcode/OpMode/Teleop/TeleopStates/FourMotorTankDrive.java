@@ -29,14 +29,6 @@ public class FourMotorTankDrive extends ATeleopState {
   }
 
   @Override
-  public List<Class<? extends ISubsystem>> getSubsystems() {
-    List<Class<? extends ISubsystem>> subsystemClasses = new ArrayList<>();
-    subsystemClasses.add(MecanumDriveTrain.class);
-
-    return subsystemClasses;
-  }
-
-  @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
       driveTrain.setFLPower(-this.gp1.left_stick_y);
       driveTrain.setBLPower(-this.gp1.left_stick_y);
