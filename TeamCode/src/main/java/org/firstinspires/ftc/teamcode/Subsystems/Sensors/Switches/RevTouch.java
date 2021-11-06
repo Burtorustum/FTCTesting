@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
 
 public class RevTouch extends ASensor<Boolean> {
+
   private RevTouchSensor touchSensor;
 
   public RevTouch(HardwareMap hwMap, Mode mode, String configName) {

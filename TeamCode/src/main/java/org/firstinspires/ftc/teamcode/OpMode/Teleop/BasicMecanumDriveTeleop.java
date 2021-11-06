@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.OpMode.Teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.sun.tools.javac.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +18,8 @@ public class BasicMecanumDriveTeleop extends AOpMode {
   @Override
   public IRobot setupRobot() {
     return new MecanumDriveRobot(hardwareMap,
-        new StartParameters(StartParameters.Mode.TELEOP, StartParameters.Start.IRRELEVANT, StartParameters.Team.IRRELEVANT));
+        new StartParameters(StartParameters.Mode.TELEOP, StartParameters.Start.IRRELEVANT,
+            StartParameters.Team.IRRELEVANT));
   }
 
   @Override

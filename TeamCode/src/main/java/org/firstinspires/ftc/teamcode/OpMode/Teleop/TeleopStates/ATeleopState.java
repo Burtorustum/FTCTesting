@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 
 public abstract class ATeleopState extends ARobotState {
+
   protected final Gamepad gp1;
   protected final Gamepad gp2;
 

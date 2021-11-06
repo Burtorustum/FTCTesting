@@ -2,10 +2,9 @@ package org.firstinspires.ftc.teamcode.OpMode.Auton.AutonStates;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.firstinspires.ftc.teamcode.Utility.MiniPID.MiniPIDEx;
-import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU.IMUGyro;
+import org.firstinspires.ftc.teamcode.Utility.MiniPID.MiniPIDEx;
 
 public class GyroTurn extends AAutonState {
 
@@ -18,12 +17,14 @@ public class GyroTurn extends AAutonState {
 
   /**
    * Construct a new GyroTurn
-   * @param kp P-coefficient
-   * @param ki I-coefficient
-   * @param kd D-coefficient
+   *
+   * @param kp     P-coefficient
+   * @param ki     I-coefficient
+   * @param kd     D-coefficient
    * @param target target heading in degrees 0 <= target < 360
    */
-  public GyroTurn(double kp, double ki, double kd, double target, double tolerance, boolean turnRight) {
+  public GyroTurn(double kp, double ki, double kd, double target, double tolerance,
+      boolean turnRight) {
 
     this.pid = new MiniPIDEx(kp, ki, kd);
     this.pid.setSetpoint(target);

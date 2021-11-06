@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.sun.tools.javac.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,9 +16,8 @@ import org.firstinspires.ftc.teamcode.OpMode.Teleop.TeleopStates.ATeleopState;
 import org.firstinspires.ftc.teamcode.Robot.IRobot;
 import org.firstinspires.ftc.teamcode.Robot.MecanumDriveRobot;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
-import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU.IMUGyro;
 import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU.IMUGyro;
 
 @TeleOp(name = "PID Turn Tuner", group = "Tuning")
 public class PIDTuner extends AOpMode {
@@ -27,19 +25,21 @@ public class PIDTuner extends AOpMode {
   @Override
   protected IRobot setupRobot() {
     return new MecanumDriveRobot(hardwareMap,
-        new StartParameters(StartParameters.Mode.TELEOP, StartParameters.Start.IRRELEVANT, StartParameters.Team.IRRELEVANT));
+        new StartParameters(StartParameters.Mode.TELEOP, StartParameters.Start.IRRELEVANT,
+            StartParameters.Team.IRRELEVANT));
   }
 
   @Override
   protected Collection<Pair<Integer, ARobotState>> setupStates() {
     List<Pair<Integer, ARobotState>> stateList = new ArrayList<>();
-    stateList.add(new Pair<>(0, new TuneGyroPID(new GyroTurn(.4,0,10, 180, .05, true),
+    stateList.add(new Pair<>(0, new TuneGyroPID(new GyroTurn(.4, 0, 10, 180, .05, true),
         gamepad1, gamepad2)));
     return stateList;
   }
 }
 
 class TuneGyroPID extends ATeleopState {
+
   private final GyroTurn turnState;
   private final ElapsedTime timer;
 
@@ -66,15 +66,14 @@ class TuneGyroPID extends ATeleopState {
         if (this.gp1.a) {
           this.ki += 0.05;
         } else if (this.gp1.b) {
-            this.kd += 0.25;
+          this.kd += 0.25;
         } else if (this.gp1.x) {
           this.kp += 0.05;
         } else if (this.gp1.y && this.target < 360) {
           this.target += 15;
         }
         this.timer.reset();
-      }
-      else if (this.gp1.dpad_down) {
+      } else if (this.gp1.dpad_down) {
         if (this.gp1.a && this.ki > 0) {
           this.ki -= 0.05;
         } else if (this.gp1.b && this.kd > 0) {
@@ -85,12 +84,10 @@ class TuneGyroPID extends ATeleopState {
           this.target -= 15;
         }
         this.timer.reset();
-      }
-      else if (this.gp1.left_bumper) {
+      } else if (this.gp1.left_bumper) {
         this.tolerance += .01;
         timer.reset();
-      }
-      else if (this.gp1.right_bumper) {
+      } else if (this.gp1.right_bumper) {
         this.tolerance -= .01;
         timer.reset();
       }
@@ -130,7 +127,8 @@ class TuneGyroPID extends ATeleopState {
 
   @Override
   public List<GamepadButtons> getButtons() {
-    return Arrays.asList(GamepadButtons.values()); // This state must be run independently of any other opmode that uses the gamepad
+    return Arrays.asList(GamepadButtons
+        .values()); // This state must be run independently of any other opmode that uses the gamepad
   }
 
 }

@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
 
 public class MRColor extends ASensor<HashMap<ARGB, Integer>> {
+
   private ModernRoboticsI2cColorSensor colorSensor;
 
   public MRColor(HardwareMap hwMap, Mode mode, String configName) {

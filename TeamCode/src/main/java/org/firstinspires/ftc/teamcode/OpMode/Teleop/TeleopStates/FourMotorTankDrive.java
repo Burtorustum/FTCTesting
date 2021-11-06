@@ -3,9 +3,7 @@ package org.firstinspires.ftc.teamcode.OpMode.Teleop.TeleopStates;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
-import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
 
 public class FourMotorTankDrive extends ATeleopState {
@@ -30,10 +28,10 @@ public class FourMotorTankDrive extends ATeleopState {
 
   @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
-      driveTrain.setFLPower(-this.gp1.left_stick_y);
-      driveTrain.setBLPower(-this.gp1.left_stick_y);
-      driveTrain.setFRPower(-this.gp1.right_stick_y);
-      driveTrain.setBRPower(-this.gp1.right_stick_y);
+    driveTrain.setFLPower(-this.gp1.left_stick_y);
+    driveTrain.setBLPower(-this.gp1.left_stick_y);
+    driveTrain.setFRPower(-this.gp1.right_stick_y);
+    driveTrain.setBRPower(-this.gp1.right_stick_y);
   }
 
 }

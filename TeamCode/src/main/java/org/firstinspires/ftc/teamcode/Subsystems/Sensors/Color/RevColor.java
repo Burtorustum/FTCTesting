@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
 
 public class RevColor extends ASensor<HashMap<ARGB, Integer>> {
+
   private RevColorSensorV3 colorSensor;
 
   public RevColor(HardwareMap hwMap, StartParameters.Mode mode, String configName) {

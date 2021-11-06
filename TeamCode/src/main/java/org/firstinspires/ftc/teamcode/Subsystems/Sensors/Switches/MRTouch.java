@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsTouchSensor;
-import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;

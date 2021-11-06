@@ -1,37 +1,38 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
 public class StartParameters {
-    private final Mode mode;
-    private final Start start;
-    private final Team team;
 
-    public StartParameters(Mode mode, Start start, Team team) {
-        this.mode = mode;
-        this.start = start;
-        this.team = team;
-    }
+  private final Mode mode;
+  private final Start start;
+  private final Team team;
 
-    public Mode getMode() {
-        return mode;
-    }
+  public StartParameters(Mode mode, Start start, Team team) {
+    this.mode = mode;
+    this.start = start;
+    this.team = team;
+  }
 
-    public Start getStart() {
-        return start;
-    }
+  public Mode getMode() {
+    return mode;
+  }
 
-    public Team getTeam() {
-        return team;
-    }
+  public Start getStart() {
+    return start;
+  }
 
-    public enum Start {
-        CLOSEDUCK, FARDUCK, IRRELEVANT
-    }
+  public Team getTeam() {
+    return team;
+  }
 
-    public enum Team {
-        RED, BLUE, IRRELEVANT
-    }
+  public enum Start {
+    CLOSEDUCK, FARDUCK, IRRELEVANT
+  }
 
-    public enum Mode {
-      AUTON, TELEOP
-    }
+  public enum Team {
+    RED, BLUE, IRRELEVANT
+  }
+
+  public enum Mode {
+    AUTON, TELEOP
+  }
 }

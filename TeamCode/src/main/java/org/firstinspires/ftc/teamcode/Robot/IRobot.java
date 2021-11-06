@@ -4,15 +4,15 @@ import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 
 public interface IRobot {
 
-    void initLoop();
+  void initLoop();
 
-    void start();
+  void start();
 
-    void stop();
+  void stop();
 
-    void dispatchState(ARobotState robotState);
+  void dispatchState(ARobotState robotState);
 
-    StartParameters getParams();
+  StartParameters getParams();
 
-    boolean isInitialized();
+  boolean isInitialized();
 }

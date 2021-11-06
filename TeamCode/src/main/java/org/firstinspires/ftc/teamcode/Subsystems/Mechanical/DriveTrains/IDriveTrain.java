@@ -9,37 +9,31 @@ import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 public interface IDriveTrain extends ISubsystem {
 
   /**
-   *
    * @param power
    */
   void turnRight(double power);
 
   /**
-   *
    * @param powers
    */
   void setMotorPower(List<Pair<DTMotorPos, Double>> powers);
 
   /**
-   *
    * @param motorMode
    */
   void setMotorRunMode(RunMode motorMode);
 
   /**
-   *
    * @param behavior
    */
   void setMotorZeroPower(ZeroPowerBehavior behavior);
 
   /**
-   *
    * @param targets
    */
   void setTargetPosition(List<Pair<DTMotorPos, Integer>> targets);
 
   /**
-   *
    * @return
    */
   List<Pair<DTMotorPos, Integer>> getCurrentPosition();

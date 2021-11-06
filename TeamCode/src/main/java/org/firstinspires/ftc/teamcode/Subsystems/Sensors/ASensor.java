@@ -25,17 +25,22 @@ public abstract class ASensor<T> implements ISubsystem {
   public abstract T getOutput();
 
   @Override
-  public void autoInitLoop() {}
+  public void autoInitLoop() {
+  }
 
   @Override
-  public void teleopInitLoop() {}
+  public void teleopInitLoop() {
+  }
 
   @Override
-  public void autoStart() {}
+  public void autoStart() {
+  }
 
   @Override
-  public void teleopStart() {}
+  public void teleopStart() {
+  }
 
   @Override
-  public void stop() {}
+  public void stop() {
+  }
 }

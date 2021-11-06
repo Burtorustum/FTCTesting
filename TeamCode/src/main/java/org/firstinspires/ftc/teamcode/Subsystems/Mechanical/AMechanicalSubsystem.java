@@ -5,6 +5,7 @@ import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 
 public abstract class AMechanicalSubsystem implements ISubsystem {
+
   public AMechanicalSubsystem(HardwareMap hwMap, StartParameters.Mode mode) {
     switch (mode) {
       case AUTON:
@@ -21,17 +22,22 @@ public abstract class AMechanicalSubsystem implements ISubsystem {
   protected abstract void teleopInit(HardwareMap hwMap);
 
   @Override
-  public void autoInitLoop() {}
+  public void autoInitLoop() {
+  }
 
   @Override
-  public void teleopInitLoop() {}
+  public void teleopInitLoop() {
+  }
 
   @Override
-  public void autoStart() {}
+  public void autoStart() {
+  }
 
   @Override
-  public void teleopStart() {}
+  public void teleopStart() {
+  }
 
   @Override
-  public void stop() {}
+  public void stop() {
+  }
 }

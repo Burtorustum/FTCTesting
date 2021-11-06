@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
 
 public class MRRange extends ASensor<Double> {
+
   private ModernRoboticsI2cRangeSensor rangeSensor;
   private final DistanceUnit unit;
 

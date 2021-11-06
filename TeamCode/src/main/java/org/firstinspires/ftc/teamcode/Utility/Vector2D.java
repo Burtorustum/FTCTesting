@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Utility;
 
 public class Vector2D {
+
   public final double x;
   public final double y;
 
@@ -13,8 +14,8 @@ public class Vector2D {
     return new Vector2D(this.x + other.x, this.y + other.y);
   }
 
-  public Vector2D scale(double s){
-    return new Vector2D(this.x*s, this.y*s);
+  public Vector2D scale(double s) {
+    return new Vector2D(this.x * s, this.y * s);
   }
 
   public double magnitude() {
