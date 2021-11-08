@@ -5,6 +5,8 @@ import com.qualcomm.hardware.bosch.BNO055IMU.Parameters;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ReadWriteFile;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
@@ -17,10 +19,13 @@ public class IMUGyro extends ASensor<Float> {
 
   private BNO055IMU gyro;
 
-  private boolean calibComplete = false;
+  private final boolean readCalibrationData;
+  private final String filename = "BNO055IMUCalibration.json";
+  private boolean calibrationComplete = false;
 
-  public IMUGyro(HardwareMap hwMap, StartParameters.Mode mode, String configName) {
+  public IMUGyro(HardwareMap hwMap, StartParameters.Mode mode, String configName, boolean readCalibrationData) {
     super(hwMap, mode, configName);
+    this.readCalibrationData = readCalibrationData;
   }
 
   /**
@@ -42,40 +47,55 @@ public class IMUGyro extends ASensor<Float> {
 
   @Override
   public void autoInit(HardwareMap hwMap, String configName) {
-    this.gyro = hwMap.get(BNO055IMU.class, configName);
-
-    Parameters parameters = new Parameters();
-    parameters.calibrationDataFile = "BNO055IMUCalibration.json";
-    parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-    //parameters.mode = SensorMode.GYRONLY;
-    parameters.loggingEnabled = true;
-    parameters.loggingTag = "IMU";
-
-    this.gyro.initialize(parameters);
+    this.generalInit(hwMap, configName);
   }
 
   @Override
   public void teleopInit(HardwareMap hwMap, String configName) {
+    this.generalInit(hwMap, configName);
+  }
+
+  private void generalInit(HardwareMap hwMap, String configName) {
     this.gyro = hwMap.get(BNO055IMU.class, configName);
 
-    Parameters parameters = new Parameters();
-    parameters.calibrationDataFile = "BNO055IMUCalibration.json";
+    Parameters parameters = new BNO055IMU.Parameters();
     parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-    //parameters.mode = SensorMode.GYRONLY;
 
-    // Ideally don't need to re-calibrate bc should be calibrated from auton
+    // If read calibration data from file, set param to filename
+    if (this.readCalibrationData) {
+      parameters.calibrationDataFile = this.filename;
+    }
+    // Otherwise log calibration and do not read data from file
+    else {
+      parameters.calibrationDataFile = null;
+      parameters.loggingEnabled = true;
+      parameters.loggingTag = "IMU";
+    }
+    // Initialize gyro with either data from file or new data
     this.gyro.initialize(parameters);
-    this.calibComplete = true;
+
+    // If we aren't reading from a file, write new data to file
+    if (!this.readCalibrationData) {
+      this.writeCalibrationDataToFile();
+    }
+
+    // Calibration done
+    this.calibrationComplete = true;
+  }
+
+  private void writeCalibrationDataToFile() {
+    BNO055IMU.CalibrationData calibrationData = this.gyro.readCalibrationData();
+    File file = AppUtil.getInstance().getSettingsFile(filename);
+    ReadWriteFile.writeFile(file, calibrationData.serialize());
   }
 
   @Override
   public void autoInitLoop() {
-    if (!this.calibComplete && this.gyro.isGyroCalibrated()) {
+    if (!this.calibrationComplete && this.gyro.isGyroCalibrated()) {
       BNO055IMU.CalibrationData calibrationData = this.gyro.readCalibrationData();
-      String filename = "BNO055IMUCalibration.json";
-      File file = AppUtil.getInstance().getSettingsFile(filename);
+      File file = AppUtil.getInstance().getSettingsFile(this.filename);
       ReadWriteFile.writeFile(file, calibrationData.serialize());
-      this.calibComplete = true;
+      this.calibrationComplete = true;
     }
   }
 
@@ -86,7 +106,17 @@ public class IMUGyro extends ASensor<Float> {
 
   @Override
   public boolean isInitialized() {
-    return this.calibComplete;
+    return this.calibrationComplete;
+  }
+
+  public List<String> getCalibrationInfo() {
+    List<String> telemetryData = new ArrayList<>();
+    telemetryData.add("Status: " + this.gyro.getSystemStatus().toShortString());
+    telemetryData.add("Calib Status: " + this.gyro.getCalibrationStatus().toString());
+    telemetryData.add("Gyro Calib? " + this.gyro.isGyroCalibrated());
+    telemetryData.add("heading: " + this.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+
+    return telemetryData;
   }
 
 }

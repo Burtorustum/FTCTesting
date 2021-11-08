@@ -5,9 +5,10 @@ import java.util.List;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
 
-public class EncoderTestState extends ARobotState {
+public class EncoderTelemetryState extends ARobotState {
 
-  public EncoderTestState() {
+  public EncoderTelemetryState() {
+
   }
 
   @Override

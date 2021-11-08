@@ -26,7 +26,7 @@ public class PIDTuner extends AOpMode {
   protected IRobot setupRobot() {
     return new MecanumDriveRobot(hardwareMap,
         new StartParameters(StartParameters.Mode.TELEOP, StartParameters.Start.IRRELEVANT,
-            StartParameters.Team.IRRELEVANT));
+            StartParameters.Team.IRRELEVANT), false);
   }
 
   @Override
@@ -127,8 +127,8 @@ class TuneGyroPID extends ATeleopState {
 
   @Override
   public List<GamepadButtons> getButtons() {
-    return Arrays.asList(GamepadButtons
-        .values()); // This state must be run independently of any other opmode that uses the gamepad
+    return Arrays.asList(GamepadButtons.values());
+    // This state must be run independently of any other opmode that uses the gamepad
   }
 
 }

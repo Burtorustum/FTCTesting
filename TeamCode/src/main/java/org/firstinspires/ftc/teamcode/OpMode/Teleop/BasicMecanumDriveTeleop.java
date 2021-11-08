@@ -19,7 +19,7 @@ public class BasicMecanumDriveTeleop extends AOpMode {
   public IRobot setupRobot() {
     return new MecanumDriveRobot(hardwareMap,
         new StartParameters(StartParameters.Mode.TELEOP, StartParameters.Start.IRRELEVANT,
-            StartParameters.Team.IRRELEVANT));
+            StartParameters.Team.IRRELEVANT), true);
   }
 
   @Override

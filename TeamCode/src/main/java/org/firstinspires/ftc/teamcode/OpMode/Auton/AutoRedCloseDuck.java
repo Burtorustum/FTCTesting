@@ -20,7 +20,7 @@ public class AutoRedCloseDuck extends AOpMode {
   protected IRobot setupRobot() {
     return new MecanumDriveRobot(hardwareMap,
         new StartParameters(StartParameters.Mode.AUTON, StartParameters.Start.CLOSEDUCK,
-            StartParameters.Team.RED));
+            StartParameters.Team.RED), false);
 
   }
 
