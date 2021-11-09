@@ -92,12 +92,7 @@ public class IMUGyro extends ASensor<Float> {
 
   @Override
   public void autoInitLoop() {
-    if (!this.calibrationComplete && this.gyro.isGyroCalibrated()) {
-      BNO055IMU.CalibrationData calibrationData = this.gyro.readCalibrationData();
-      File file = AppUtil.getInstance().getSettingsFile(this.filename);
-      ReadWriteFile.writeFile(file, calibrationData.serialize());
-      this.calibrationComplete = true;
-    }
+
   }
 
   @Override
