@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Subsystems.Sensors.Distance;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
@@ -40,6 +42,14 @@ public class Rev2M extends ASensor<Double> {
   @Override
   public Double getOutput() {
     return this.distSensor.getDistance(this.unit);
+  }
+
+  @Override
+  public Collection<String> getInformation() {
+    Collection<String> c  = new ArrayList<>();
+    c.add("Sensor: " + this.distSensor.getDeviceName() + " --------");
+    c.add("Distance: " + this.getOutput() + this.unit.toString());
+    return c;
   }
 
 }

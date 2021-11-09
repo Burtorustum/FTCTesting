@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
@@ -37,5 +39,13 @@ public class MRLimitSwitch extends ASensor<Double> {
   @Override
   public Double getOutput() {
     return this.limitSwitch.getVoltage();
+  }
+
+  @Override
+  public Collection<String> getInformation() {
+    Collection<String> c  = new ArrayList<>();
+    c.add("Sensor: " + this.limitSwitch.getDeviceName() + " --------");
+    c.add("Voltage: " + this.getOutput() + " volts");
+    return c;
   }
 }

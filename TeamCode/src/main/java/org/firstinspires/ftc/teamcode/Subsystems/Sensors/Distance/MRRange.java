@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Subsystems.Sensors.Distance;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;
@@ -40,5 +42,13 @@ public class MRRange extends ASensor<Double> {
   @Override
   public Double getOutput() {
     return this.rangeSensor.getDistance(this.unit);
+  }
+
+  @Override
+  public Collection<String> getInformation() {
+    Collection<String> c  = new ArrayList<>();
+    c.add("Sensor: " + this.rangeSensor.getDeviceName() + " --------");
+    c.add("Distance: " + this.getOutput() + this.unit.toString());
+    return c;
   }
 }

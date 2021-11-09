@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystems.Sensors;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.Collection;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.ISubsystem;
 
@@ -17,12 +18,13 @@ public abstract class ASensor<T> implements ISubsystem {
     }
   }
 
-
   protected abstract void autoInit(HardwareMap hwMap, String configName);
 
   protected abstract void teleopInit(HardwareMap hwMap, String configName);
 
   public abstract T getOutput();
+
+  public abstract Collection<String> getInformation();
 
   @Override
   public void autoInitLoop() {
@@ -43,4 +45,6 @@ public abstract class ASensor<T> implements ISubsystem {
   @Override
   public void stop() {
   }
+
+
 }

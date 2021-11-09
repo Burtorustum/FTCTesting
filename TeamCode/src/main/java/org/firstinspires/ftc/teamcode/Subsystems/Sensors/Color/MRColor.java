@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Subsystems.Sensors.Color;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;
@@ -44,5 +46,19 @@ public class MRColor extends ASensor<HashMap<ARGB, Integer>> {
     values.put(ARGB.BLUE, this.colorSensor.blue());
 
     return values;
+  }
+
+  @Override
+  public Collection<String> getInformation() {
+    HashMap<ARGB, Integer> colorMap = this.getOutput();
+
+    Collection<String> c  = new ArrayList<>();
+    c.add("Sensor: " + this.colorSensor.getDeviceName() + " --------");
+    c.add("Alpha: " + colorMap.get(ARGB.ALPHA));
+    c.add("Red: " + colorMap.get(ARGB.RED));
+    c.add("Green: " + colorMap.get(ARGB.GREEN));
+    c.add("Blue: " + colorMap.get(ARGB.BLUE));
+
+    return c;
   }
 }

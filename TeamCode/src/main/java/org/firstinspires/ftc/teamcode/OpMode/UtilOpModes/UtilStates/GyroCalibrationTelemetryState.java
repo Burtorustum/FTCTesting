@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.OpMode.UtilOpModes.UtilStates;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
@@ -8,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Sensors.IMU.IMUGyro;
 
 public class GyroCalibrationTelemetryState extends ARobotState {
 
-  private List<String> telemetryData;
+  private Collection<String> telemetryData;
 
   public GyroCalibrationTelemetryState() {
     this.telemetryData = new ArrayList<>();
@@ -17,7 +18,7 @@ public class GyroCalibrationTelemetryState extends ARobotState {
 
   @Override
   public void receiveGyro(IMUGyro gyro) {
-    this.telemetryData = gyro.getCalibrationInfo();
+    this.telemetryData = gyro.getInformation();
   }
 
   @Override
@@ -26,12 +27,12 @@ public class GyroCalibrationTelemetryState extends ARobotState {
   }
 
   @Override
-  public List<String> getTelemetry() {
+  public Collection<String> getTelemetry() {
     return this.telemetryData;
   }
 
   @Override
-  public List<GamepadButtons> getButtons() {
+  public Collection<GamepadButtons> getButtons() {
     return new ArrayList<>();
   }
 }

@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ReadWriteFile;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -109,8 +110,14 @@ public class IMUGyro extends ASensor<Float> {
     return this.calibrationComplete;
   }
 
-  public List<String> getCalibrationInfo() {
+  @Override
+  public Collection<String> getInformation() {
+    return this.getCalibrationInfo();
+  }
+
+  private List<String> getCalibrationInfo() {
     List<String> telemetryData = new ArrayList<>();
+    telemetryData.add("Sensor: IMU Gyro --------");
     telemetryData.add("Status: " + this.gyro.getSystemStatus().toShortString());
     telemetryData.add("Calib Status: " + this.gyro.getCalibrationStatus().toString());
     telemetryData.add("Gyro Calib? " + this.gyro.isGyroCalibrated());

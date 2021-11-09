@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches;
 
 import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
@@ -38,4 +40,13 @@ public class RevTouch extends ASensor<Boolean> {
   public Boolean getOutput() {
     return this.touchSensor.isPressed();
   }
+
+  @Override
+  public Collection<String> getInformation() {
+    Collection<String> c  = new ArrayList<>();
+    c.add("Sensor: " + this.touchSensor.getDeviceName() + " --------");
+    c.add("Is pressed? " + this.getOutput());
+    return c;
+  }
+
 }

@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches;
 
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters.Mode;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
@@ -37,6 +39,14 @@ public class RevMagneticLimitSwitch extends ASensor<Boolean> {
   @Override
   public Boolean getOutput() {
     return !this.limitSwitch.getState();
+  }
+
+  @Override
+  public Collection<String> getInformation() {
+    Collection<String> c  = new ArrayList<>();
+    c.add("Sensor: " + this.limitSwitch.getDeviceName() + " --------");
+    c.add("Magnet sensed? " + this.getOutput());
+    return c;
   }
 
 }
