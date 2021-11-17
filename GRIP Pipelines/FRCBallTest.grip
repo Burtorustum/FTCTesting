@@ -9,10 +9,10 @@
       <grip:Input step="0" socket="0"/>
       <grip:Input step="0" socket="1"/>
       <grip:Input step="0" socket="2">
-        <value>0.4</value>
+        <value>0.25</value>
       </grip:Input>
       <grip:Input step="0" socket="3">
-        <value>0.4</value>
+        <value>0.25</value>
       </grip:Input>
       <grip:Input step="0" socket="4">
         <value>INTER_LINEAR</value>

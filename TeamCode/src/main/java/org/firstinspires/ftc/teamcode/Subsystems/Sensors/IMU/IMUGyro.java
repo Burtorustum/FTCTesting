@@ -59,8 +59,9 @@ public class IMUGyro extends ASensor<Float> {
   private void generalInit(HardwareMap hwMap, String configName) {
     this.gyro = hwMap.get(BNO055IMU.class, configName);
 
-    Parameters parameters = new BNO055IMU.Parameters();
+    BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
     parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+    parameters.calibrationData = null;
 
     // If read calibration data from file, set param to filename
     if (this.readCalibrationData) {
