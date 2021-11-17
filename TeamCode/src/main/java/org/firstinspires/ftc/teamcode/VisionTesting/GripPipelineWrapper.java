@@ -12,6 +12,10 @@ public class GripPipelineWrapper {
     private final OpenCvCamera cvCamera;
     private final ACustomPipeline pipeline;
 
+    public GripPipelineWrapper(ACustomPipeline pipeline, HardwareMap hardwareMap) {
+        this(pipeline, "webcam", hardwareMap, 1280, 720);
+    }
+
     public GripPipelineWrapper(ACustomPipeline pipeline, String configName, HardwareMap hardwareMap, int cameraPixelWidth, int cameraPixelHeight) {
         // Get live-view port
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
