@@ -86,3 +86,11 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+/FtcRobotController/.classpath
+/TeamCode/.classpath
+/FtcRobotController/.project
+/TeamCode/.project
+/.project
+# vscode
+*.settings
+*.project
