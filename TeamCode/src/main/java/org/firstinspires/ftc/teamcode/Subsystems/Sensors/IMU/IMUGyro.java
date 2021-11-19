@@ -20,13 +20,12 @@ public class IMUGyro extends ASensor<Float> {
 
   private BNO055IMU gyro;
 
-  private final boolean readCalibrationData;
-  private final String filename = "BNO055IMUCalibration.json";
+  private final boolean calibrate;
   private boolean calibrationComplete = false;
 
-  public IMUGyro(HardwareMap hwMap, StartParameters.Mode mode, String configName, boolean readCalibrationData) {
+  public IMUGyro(HardwareMap hwMap, StartParameters.Mode mode, String configName, boolean calibrate) {
     super(hwMap, mode, configName);
-    this.readCalibrationData = readCalibrationData;
+    this.calibrate = calibrate;
   }
 
   /**
@@ -61,35 +60,15 @@ public class IMUGyro extends ASensor<Float> {
 
     BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
     parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-    parameters.calibrationData = null;
 
     // If read calibration data from file, set param to filename
-    if (this.readCalibrationData) {
-      parameters.calibrationDataFile = this.filename;
-    }
-    // Otherwise log calibration and do not read data from file
-    else {
-      parameters.calibrationDataFile = null;
-      parameters.loggingEnabled = true;
-      parameters.loggingTag = "IMU";
-    }
-    // TODO: Only initialize if we don't want to read calibration data
-    // Initialize gyro with either data from file or new data
-    this.gyro.initialize(parameters);
-
-    // If we aren't reading from a file, write new data to file
-    if (!this.readCalibrationData) {
-      this.writeCalibrationDataToFile();
+    if (this.calibrate) {
+      // only init gyro when want to get new calib data
+      this.gyro.initialize(parameters);
     }
 
     // Calibration done
     this.calibrationComplete = true;
-  }
-
-  private void writeCalibrationDataToFile() {
-    BNO055IMU.CalibrationData calibrationData = this.gyro.readCalibrationData();
-    File file = AppUtil.getInstance().getSettingsFile(filename);
-    ReadWriteFile.writeFile(file, calibrationData.serialize());
   }
 
   @Override
