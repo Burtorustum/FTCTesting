@@ -13,6 +13,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.MRLimitSwitch;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.MRTouch;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.RevMagneticLimitSwitch;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.RevTouch;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.VisionCVWrapper;
 
 // COULD MAKE SEPARATE ABSTRACT CLASS FOR EACH ROBOT ITERATION, REDUCING NUMBER OF METHODS
 public abstract class ARobotState {
@@ -32,7 +33,7 @@ public abstract class ARobotState {
   public abstract Collection<GamepadButtons> getButtons();
 
   /**
-   * TODO: Make this better, rn very annoying
+   * TODO: Make this better? rn very annoying
    *
    * @return a list of class files that this state modifies
    */
@@ -76,5 +77,8 @@ public abstract class ARobotState {
 
   public void receiveMRColor(MRColor color) {
   }
+
+  // Vision:
+  public void receiveVisionCVWrapper(VisionCVWrapper vision) {}
 
 }

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.VisionTesting;
+package org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,22 +13,22 @@ import org.opencv.imgproc.*;
 *
 * @author GRIP
 */
-public class DetectBanana implements IGRIPPipeline {
+public class DetectBanana extends AGripPipeline {
 
 	//Outputs
-	private Mat cvCvtcolorOutput = new Mat();
-	private Mat blurOutput = new Mat();
-	private Mat hsvThresholdOutput = new Mat();
-	private Mat maskOutput = new Mat();
-	private ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
-	private ArrayList<MatOfPoint> filterContoursOutput = new ArrayList<MatOfPoint>();
-	private ArrayList<MatOfPoint> convexHullsOutput = new ArrayList<MatOfPoint>();
+	private final Mat cvCvtcolorOutput = new Mat();
+	private final Mat blurOutput = new Mat();
+	private final Mat hsvThresholdOutput = new Mat();
+	private final Mat maskOutput = new Mat();
+	private final ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
+	private final ArrayList<MatOfPoint> filterContoursOutput = new ArrayList<MatOfPoint>();
+	private final ArrayList<MatOfPoint> convexHullsOutput = new ArrayList<MatOfPoint>();
 
 
 	/**
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
-	public void process(Mat source0) {
+	private void updateStages(Mat source0) {
 		// Step CV_cvtColor0:
 		Mat cvCvtcolorSrc = source0;
 		int cvCvtcolorCode = Imgproc.COLOR_RGB2HSV;
@@ -146,13 +146,14 @@ public class DetectBanana implements IGRIPPipeline {
 	}
 
 	@Override
-	public Mat getDisplayImage(Mat source) {
-		return this.maskOutput();
+	public List<MatOfPoint> getContours() {
+		return this.convexHullsOutput();
 	}
 
 	@Override
-	public List<MatOfPoint> getContours() {
-		return this.convexHullsOutput();
+	public Mat processFrame(Mat input) {
+		this.updateStages(input);
+		return this.maskOutput();
 	}
 
 
