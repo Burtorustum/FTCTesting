@@ -73,6 +73,7 @@ public class IMUGyro extends ASensor<Float> {
       parameters.loggingEnabled = true;
       parameters.loggingTag = "IMU";
     }
+    // TODO: Only initialize if we don't want to read calibration data
     // Initialize gyro with either data from file or new data
     this.gyro.initialize(parameters);
 
