@@ -21,6 +21,7 @@ public class EncoderTelemetryState extends ARobotState {
   @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
     this.telemetryData.clear();
+    this.telemetryData.add("Drivetrain Encoders -------------------------");
     for (Pair<DTMotorPos, Integer> pair : driveTrain.getCurrentPosition()) {
       this.telemetryData.add(pair.fst.name() + ": " + pair.snd);
     }
