@@ -6,10 +6,8 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.AGripPipeline;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.ADetectorPipeline;
 import org.opencv.core.MatOfPoint;
-import org.opencv.core.Rect;
-import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -18,21 +16,21 @@ import org.openftc.easyopencv.OpenCvWebcam;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-public class VisionCVWrapper extends ASensor<VisionCVWrapper.ElementPosition> {
+public class VisionCVWrapper<T> extends ASensor<Map<T, List<MatOfPoint>>> {
 
     private OpenCvWebcam webcam;
-    private final AGripPipeline pipeline;
+    private final ADetectorPipeline<T> pipeline;
 
     private final int cameraPixelWidth, cameraPixelHeight;
 
-    public VisionCVWrapper(StartParameters.Mode mode, AGripPipeline pipeline, HardwareMap hardwareMap, String configName,  int cameraPixelWidth, int cameraPixelHeight) {
+    public VisionCVWrapper(StartParameters.Mode mode, ADetectorPipeline<T> pipeline, HardwareMap hardwareMap, String configName, int cameraPixelWidth, int cameraPixelHeight) {
         super(hardwareMap, mode, configName);
         this.pipeline = pipeline;
         this.cameraPixelWidth = cameraPixelWidth;
         this.cameraPixelHeight = cameraPixelHeight;
     }
-
 
     public void closeLiveview() {
         this.webcam.pauseViewport();
@@ -77,32 +75,8 @@ public class VisionCVWrapper extends ASensor<VisionCVWrapper.ElementPosition> {
     }
 
     @Override
-    public ElementPosition getOutput() {
-        List<MatOfPoint> contours = pipeline.getContours();
-
-        if (contours.size() == 0) {
-            return ElementPosition.RIGHT;
-        }
-
-        contours.size();
-        double areaSum = 0;
-        double xAvg = 0;
-
-        for (int i = 0; i < contours.size(); i++) {
-            // Bound contour with a rectangle
-            Rect boundingRect = Imgproc.boundingRect(contours.get(i));
-            double areaLol = boundingRect.area();
-            areaSum = areaSum + areaLol;
-            xAvg = xAvg + areaLol * (boundingRect.x + boundingRect.width / 2d);
-        }
-
-        xAvg = xAvg / areaSum;
-
-        if (xAvg > this.cameraPixelWidth / 2.0) {
-            return ElementPosition.CENTER;
-        }
-
-        return ElementPosition.LEFT;
+    public Map<T, List<MatOfPoint>> getOutput() {
+        return pipeline.getContours();
     }
 
     @Override
@@ -112,9 +86,8 @@ public class VisionCVWrapper extends ASensor<VisionCVWrapper.ElementPosition> {
 
     @Override
     public boolean isInitialized() {
-        return this.pipeline.getContours() != null;
+        return this.pipeline.getContours().size() != 0;
     }
-
 
     @Override
     public Collection<String> getInformation() {
@@ -124,8 +97,4 @@ public class VisionCVWrapper extends ASensor<VisionCVWrapper.ElementPosition> {
         return out;
     }
 
-
-    public enum ElementPosition {
-        LEFT, CENTER, RIGHT
-    }
 }

@@ -4,11 +4,12 @@ import org.opencv.core.MatOfPoint;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.util.List;
+import java.util.Map;
 
-public abstract class AGripPipeline extends OpenCvPipeline {
+public abstract class ADetectorPipeline<T> extends OpenCvPipeline {
 
     // Return the final determined contours
-    public abstract List<MatOfPoint> getContours();
+    public abstract Map<T, List<MatOfPoint>> getContours();
 }
 
 

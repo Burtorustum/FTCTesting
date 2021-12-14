@@ -4,15 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.AGripPipeline;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.DetectBanana;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.ADetectorPipeline;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.FreightLabelPipeline;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.VisionCVWrapper;
-import org.openftc.easyopencv.OpenCvPipeline;
 
 @TeleOp(name = "detect test", group = "")
 public class TestPipeline extends OpMode {
     VisionCVWrapper vision;
-    AGripPipeline pipeline = new DetectBanana(); // replace with the pipeline you want to test.
+    ADetectorPipeline pipeline = new FreightLabelPipeline(); // replace with the pipeline you want to test.
 
     @Override
     public void init() {

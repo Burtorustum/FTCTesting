@@ -8,12 +8,13 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
-import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class BallCubeLabelPipeline extends OpenCvPipeline {
+public class FreightLabelPipeline extends ADetectorPipeline<FreightLabelPipeline.DetectionType> {
 
     private final Mat blurOut = new Mat();
 
@@ -38,7 +39,6 @@ public class BallCubeLabelPipeline extends OpenCvPipeline {
 
         // THRESHOLD ------------------------
         // Threshold Cubes
-
         Imgproc.cvtColor(blurOut, threshCubeOut, Imgproc.COLOR_BGR2HSV);
         Core.inRange(threshCubeOut,
                 new Scalar(0, 128, 128),
@@ -84,7 +84,7 @@ public class BallCubeLabelPipeline extends OpenCvPipeline {
                 centroid.x = moments.get_m10() / moments.get_m00();
                 centroid.y = moments.get_m01() / moments.get_m00();
 
-                allLabels.add(new StringLabel("CUBE", centroid));
+                allLabels.add(new StringLabel(DetectionType.CUBE, centroid));
             }
             if (i < numBalls) {
                 Moments moments = Imgproc.moments(contourBallOut.get(i));
@@ -93,7 +93,7 @@ public class BallCubeLabelPipeline extends OpenCvPipeline {
                 centroid.x = moments.get_m10() / moments.get_m00();
                 centroid.y = moments.get_m01() / moments.get_m00();
 
-                allLabels.add(new StringLabel("BALL", centroid));
+                allLabels.add(new StringLabel(DetectionType.BALL, centroid));
             }
         }
 
@@ -104,12 +104,12 @@ public class BallCubeLabelPipeline extends OpenCvPipeline {
 
         // Draw labels
         for (StringLabel label : allLabels) {
-            Imgproc.putText(input, label.label, label.position,
+            Imgproc.putText(input, label.label.name(), label.position,
                     Imgproc.FONT_HERSHEY_PLAIN, 3.0, new Scalar(0, 255, 255),
                     3, 0, true);
         }
 
-        // Fancy text output
+        // Fancy labelled output
         return input;
     }
 
@@ -121,21 +121,29 @@ public class BallCubeLabelPipeline extends OpenCvPipeline {
         return contourBallOut;
     }
 
-    public int numCubes() {
-        return contourCubeOut.size();
+    @Override
+    public Map<DetectionType, List<MatOfPoint>> getContours() {
+        Map<DetectionType, List<MatOfPoint>> allContours = new HashMap<>();
+        allContours.put(DetectionType.CUBE, getCubeContours());
+        allContours.put(DetectionType.BALL, getBallContours());
+        return allContours;
     }
 
-    public int numBalls() {
-        return contourBallOut.size();
+    public int numDetections(DetectionType type) {
+        return type.equals(DetectionType.BALL) ? contourBallOut.size() : contourCubeOut.size();
     }
 
     private static class StringLabel {
-        public final String label;
+        public final DetectionType label;
         public final Point position;
 
-        public StringLabel(String label, Point position) {
+        public StringLabel(DetectionType label, Point position) {
             this.label = label;
             this.position = position;
         }
+    }
+
+    public enum DetectionType {
+        BALL, CUBE;
     }
 }
