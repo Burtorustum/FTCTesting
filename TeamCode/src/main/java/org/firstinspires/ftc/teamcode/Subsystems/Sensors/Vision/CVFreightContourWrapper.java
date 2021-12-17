@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 import org.firstinspires.ftc.teamcode.Robot.StartParameters;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.ASensor;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.ADetectorPipeline;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.FreightLabelPipeline;
 import org.opencv.core.MatOfPoint;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -18,14 +19,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class VisionCVWrapper<T> extends ASensor<Map<T, List<MatOfPoint>>> {
+// This wrapper is implemented for detecting balls and cubes (FREIGHT in Freight Frenzy)
+public class CVFreightContourWrapper extends ASensor<Map<FreightLabelPipeline.DetectionType, List<MatOfPoint>>> {
 
     private OpenCvWebcam webcam;
-    private final ADetectorPipeline<T> pipeline;
+    private final ADetectorPipeline<FreightLabelPipeline.DetectionType> pipeline;
 
     private final int cameraPixelWidth, cameraPixelHeight;
 
-    public VisionCVWrapper(StartParameters.Mode mode, ADetectorPipeline<T> pipeline, HardwareMap hardwareMap, String configName, int cameraPixelWidth, int cameraPixelHeight) {
+    public CVFreightContourWrapper(StartParameters.Mode mode, ADetectorPipeline<FreightLabelPipeline.DetectionType> pipeline, HardwareMap hardwareMap, String configName, int cameraPixelWidth, int cameraPixelHeight) {
         super(hardwareMap, mode, configName);
         this.pipeline = pipeline;
         this.cameraPixelWidth = cameraPixelWidth;
@@ -75,13 +77,13 @@ public class VisionCVWrapper<T> extends ASensor<Map<T, List<MatOfPoint>>> {
     }
 
     @Override
-    public Map<T, List<MatOfPoint>> getOutput() {
+    public Map<FreightLabelPipeline.DetectionType, List<MatOfPoint>> getOutput() {
         return pipeline.getContours();
     }
 
     @Override
     public void dispatchState(ARobotState robotState) {
-        robotState.receiveVisionCVWrapper(this);
+        robotState.receiveFreightContourWrapper(this);
     }
 
     @Override

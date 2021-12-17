@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.OpMode;
 
 import java.util.Collection;
-import java.util.List;
+
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.GamepadButtons;
 import org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains.MecanumDriveTrain;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Color.MRColor;
@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.MRLimitSwitch;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.MRTouch;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.RevMagneticLimitSwitch;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Switches.RevTouch;
-import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.VisionCVWrapper;
+import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.CVFreightContourWrapper;
 
 // COULD MAKE SEPARATE ABSTRACT CLASS FOR EACH ROBOT ITERATION, REDUCING NUMBER OF METHODS
 public abstract class ARobotState {
@@ -79,6 +79,6 @@ public abstract class ARobotState {
   }
 
   // Vision:
-  public void receiveVisionCVWrapper(VisionCVWrapper vision) {}
+  public void receiveFreightContourWrapper(CVFreightContourWrapper vision) {}
 
 }
