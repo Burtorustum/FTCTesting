@@ -32,7 +32,7 @@ public class PIDTuner extends AOpMode {
   @Override
   protected Collection<Pair<Integer, ARobotState>> setupStates() {
     List<Pair<Integer, ARobotState>> stateList = new ArrayList<>();
-    stateList.add(new Pair<>(0, new TuneGyroPID(new GyroTurn(.4, 0, 10, 180, .05, true),
+    stateList.add(new Pair<>(0, new TuneGyroPID(new GyroTurn(.4, 0, 10, 180, .05),
         gamepad1, gamepad2)));
     return stateList;
   }
