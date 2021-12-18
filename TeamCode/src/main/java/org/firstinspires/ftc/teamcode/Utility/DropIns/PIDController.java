@@ -37,7 +37,7 @@ public class PIDController {
         this.kd = kd;
 
         this.newTarget(target);
-        this.maxErrorSum = 100000;
+        this.maxErrorSum = 1000000;
         this.fA = fA;
 
         this.firstUpdate = true;
@@ -90,7 +90,7 @@ public class PIDController {
 
         // Update Integral term
         this.errorSum += error * timer.seconds();
-        this.errorSum = Math.signum(errorSum) * Math.max(Math.abs(this.errorSum), this.maxErrorSum);
+        this.errorSum = Math.copySign(1, this.errorSum) * Math.min(Math.abs(this.errorSum), this.maxErrorSum);
 
         // Update derivative term. Use filter if designated
         double derivative;
