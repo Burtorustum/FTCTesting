@@ -61,7 +61,7 @@ class TuneGyroPID extends ATeleopState {
 
   @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
-    if (timer.seconds() > 0.5 && this.gp1.atRest()) {
+    if (timer.seconds() > 0.3 && this.gp1.atRest()) {
       if (this.gp1.dpad_up) {
         if (this.gp1.a) {
           this.ki += 0.05;

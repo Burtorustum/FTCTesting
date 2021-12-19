@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
-import java.util.Collection;
 import org.firstinspires.ftc.teamcode.OpMode.ARobotState;
 
 public interface ISubsystem {

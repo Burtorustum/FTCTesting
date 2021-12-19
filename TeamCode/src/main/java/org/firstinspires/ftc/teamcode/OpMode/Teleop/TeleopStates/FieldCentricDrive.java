@@ -75,7 +75,7 @@ public class FieldCentricDrive extends ATeleopState {
 
     double max = Math.max(1, Math.abs(forward) + Math.abs(strafe) + Math.abs(clockwise));
 
-    // Clip power values to within acceptable ranges for the motors
+    // Norm power values to within acceptable ranges for the motors
     flPow /= max;
     frPow /= max;
     blPow /= max;

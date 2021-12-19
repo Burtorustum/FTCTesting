@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.Subsystems.Mechanical.DriveTrains;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.sun.tools.javac.util.Pair;
@@ -17,7 +17,7 @@ public class MecanumDriveTrain extends AMechanicalSubsystem implements IDriveTra
   private final double encoderTicksPerRotation = 537.6;
   private final int gearRatio = 1;
   private final double wheelDiameter = 4; // in inches
-  private DcMotor FL, BL, FR, BR;
+  private DcMotorEx FL, BL, FR, BR;
 
   private boolean isInit = false;
 
@@ -38,10 +38,10 @@ public class MecanumDriveTrain extends AMechanicalSubsystem implements IDriveTra
   }
 
   private void generalInit(HardwareMap hwMap) {
-    this.FL = hwMap.get(DcMotor.class, "FL");
-    this.BL = hwMap.get(DcMotor.class, "BL");
-    this.FR = hwMap.get(DcMotor.class, "FR");
-    this.BR = hwMap.get(DcMotor.class, "BR");
+    this.FL = hwMap.get(DcMotorEx.class, "FL");
+    this.BL = hwMap.get(DcMotorEx.class, "BL");
+    this.FR = hwMap.get(DcMotorEx.class, "FR");
+    this.BR = hwMap.get(DcMotorEx.class, "BR");
 
     this.FL.setDirection(Direction.FORWARD);
     this.BL.setDirection(Direction.FORWARD);

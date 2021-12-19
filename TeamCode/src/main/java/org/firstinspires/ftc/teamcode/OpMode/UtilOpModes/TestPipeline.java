@@ -8,10 +8,10 @@ import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.ADetec
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.Pipelines.FreightLabelPipeline;
 import org.firstinspires.ftc.teamcode.Subsystems.Sensors.Vision.CVFreightContourWrapper;
 
-@TeleOp(name = "detect test", group = "")
+@TeleOp(name = "CV Test", group = "Testing")
 public class TestPipeline extends OpMode {
     CVFreightContourWrapper vision;
-    ADetectorPipeline pipeline = new FreightLabelPipeline(); // replace with the pipeline you want to test.
+    ADetectorPipeline<FreightLabelPipeline.DetectionType> pipeline = new FreightLabelPipeline(); // replace with the pipeline you want to test.
 
     @Override
     public void init() {
