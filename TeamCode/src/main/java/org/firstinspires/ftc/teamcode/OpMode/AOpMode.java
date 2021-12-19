@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.sun.tools.javac.util.Pair;
 import java.util.Collection;
 import java.util.List;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.OpMode.StateMachine.PriorityStateMachine;
 import org.firstinspires.ftc.teamcode.Robot.IRobot;
 

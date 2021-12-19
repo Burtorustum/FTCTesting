@@ -32,7 +32,7 @@ public class PIDTuner extends AOpMode {
   @Override
   protected Collection<Pair<Integer, ARobotState>> setupStates() {
     List<Pair<Integer, ARobotState>> stateList = new ArrayList<>();
-    stateList.add(new Pair<>(0, new TuneGyroPID(new GyroTurn(.4, 0, 10, 180, .05, true),
+    stateList.add(new Pair<>(0, new TuneGyroPID(new GyroTurn(.4, 0, 10, 180, .05),
         gamepad1, gamepad2)));
     return stateList;
   }
@@ -61,7 +61,7 @@ class TuneGyroPID extends ATeleopState {
 
   @Override
   public void receiveMecanumDriveTrain(MecanumDriveTrain driveTrain) {
-    if (timer.seconds() > 0.5 && this.gp1.atRest()) {
+    if (timer.seconds() > 0.3 && this.gp1.atRest()) {
       if (this.gp1.dpad_up) {
         if (this.gp1.a) {
           this.ki += 0.05;

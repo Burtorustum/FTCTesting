@@ -27,7 +27,7 @@ public class AutoRedCloseDuck extends AOpMode {
   @Override
   protected Collection<Pair<Integer, ARobotState>> setupStates() {
     List<Pair<Integer, ARobotState>> stateList = new ArrayList<>();
-    stateList.add(new Pair<>(0, new GyroTurn(0, 0, 0, 180, .05, true)));
+    stateList.add(new Pair<>(0, new GyroTurn(0, 0, 0, 180, .05)));
     //this.stateList.add(asdasd);
     // ...
     return stateList;
