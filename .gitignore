@@ -94,3 +94,15 @@ lint/tmp/
 # vscode
 *.settings
 *.project
+
+.gitignore
+gradle
+doc
+FtcRobotController
+libs
+*.gradle
+gradlew
+gradlew.bat
+TeamCode/lib
+TeamCode/src/main/res
+TeamCode/src/main/AndroidManifest.xml
