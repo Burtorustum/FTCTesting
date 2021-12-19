@@ -50,13 +50,16 @@ public class VisionCVWrapper extends ASensor<VisionCVWrapper.ElementPosition> {
         // WEBCAM NOT CAMERA
         this.webcam = OpenCvCameraFactory.getInstance().createWebcam(hwMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
+        // Begin opening webcam
         this.webcam.setMillisecondsPermissionTimeout(3000);
         this.webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override
             public void onOpened()
             {
-                // Start camera streaming
+                // Start camera streaming. cameraPixelWidth and cameraPixelHeight must be
+                // supported outputs for your webcam (but not necessarily the highest resolution
+                // they can output (ex: 720p webcam can also output 360x240)
                 webcam.startStreaming(cameraPixelWidth, cameraPixelHeight, OpenCvCameraRotation.UPRIGHT);
                 webcam.setPipeline(pipeline);
             }
@@ -66,34 +69,38 @@ public class VisionCVWrapper extends ASensor<VisionCVWrapper.ElementPosition> {
                 /*
                  * This will be called if the camera could not be opened (pray never)
                  */
-                throw new RuntimeException("CAMERA UNABLE TO BE OPENED NOT SURE WHY TRY OTHER CAM?");
+                throw new RuntimeException("CAMERA UNABLE TO BE OPENED. ENSURE PROPER CONNECTION OR" +
+                        " TRY ANOTHER CAM?");
             }
         });
     }
 
     @Override
     protected void teleopInit(HardwareMap hwMap, String configName) {
-        // FOR NOW WE WONT USE IN TELEOP: MAY NEED TO FIGURE SOMETHING OUT HERE IF THERE IS A USE CASE / DEALING WITH LATENCY
+        // FOR NOW WE WONT USE IN TELEOP: MAY NEED TO FIGURE SOMETHING OUT HERE IF THERE IS A USE
+        // CASE / DEALING WITH LATENCY
     }
 
     @Override
     public ElementPosition getOutput() {
         List<MatOfPoint> contours = pipeline.getContours();
 
-        if (contours.size() == 0) {
+        if (contours.isEmpty()) {
             return ElementPosition.RIGHT;
         }
 
-        contours.size();
         double areaSum = 0;
         double xAvg = 0;
 
         for (int i = 0; i < contours.size(); i++) {
-            // Bound contour with a rectangle
+            // Bound a contour with a rectangle
             Rect boundingRect = Imgproc.boundingRect(contours.get(i));
-            double areaLol = boundingRect.area();
-            areaSum = areaSum + areaLol;
-            xAvg = xAvg + areaLol * (boundingRect.x + boundingRect.width / 2d);
+            // Get that rectangle's area
+            double rectArea = boundingRect.area();
+            // Add that area to the running total sum
+            areaSum = areaSum + rectArea;
+            // Update the average x-position of all contours
+            xAvg = xAvg + rectArea * (boundingRect.x + boundingRect.width / 2.0);
         }
 
         xAvg = xAvg / areaSum;
