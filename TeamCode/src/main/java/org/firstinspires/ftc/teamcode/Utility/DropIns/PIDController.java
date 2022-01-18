@@ -89,7 +89,7 @@ public class PIDController {
         }
 
         // Update Integral term
-        this.errorSum += error * timer.seconds();
+        this.errorSum += 0.5 * error * timer.seconds();
         this.errorSum = Math.copySign(1, this.errorSum) * Math.min(Math.abs(this.errorSum), this.maxErrorSum);
 
         // Update derivative term. Use filter if designated
@@ -111,6 +111,9 @@ public class PIDController {
         this.lastError = error;
         timer.reset();
 
+        // TODO: make output range as input to object
+        // Assuming we are looking for motor power:
+        output = Math.max(-1, Math.min(output, 1));
         return output;
     }
 
